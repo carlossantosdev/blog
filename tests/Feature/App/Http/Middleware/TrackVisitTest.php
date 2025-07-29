@@ -76,7 +76,7 @@ it('does not track prefetch requests', function () {
 it('does not track requests from admins', function () {
     TrackVisit::shouldReceive('track')->never();
 
-    $user = User::factory()->create(['github_login' => 'benjamincrozat']);
+    $user = User::factory()->create(['github_login' => 'carlossantosdev']);
 
     actingAs($user)
         ->get('/');

@@ -26,6 +26,6 @@ class LinkApproved extends Notification implements ShouldQueue
             ->subject('Your link was approved')
             ->greeting('Thank you for submitting!')
             ->line("Your link to {$this->link->domain} is live on the blog and ready to be seen by my visitors.")
-            ->line('By the way, if you want to do me a favor, follow me on [X](https://x.com/benjamincrozat) and [LinkedIn](https://www.linkedin.com/in/benjamincrozat/)!');
+            ->line('By the way, if you want to do me a favor, follow me on [X](https://x.com/carlossantosdev) and [LinkedIn](https://www.linkedin.com/in/carlossantosdev/)!');
     }
 }

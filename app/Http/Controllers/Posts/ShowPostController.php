@@ -37,7 +37,7 @@ class ShowPostController extends Controller
 
         return view('posts.show', compact('post') + [
             'latestComment' => $post->comments()
-                ->whereRelation('user', 'github_login', '!=', 'benjamincrozat')
+                ->whereRelation('user', 'github_login', '!=', 'carlossantosdev')
                 ->latest()
                 ->first(),
         ]);

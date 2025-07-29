@@ -28,7 +28,7 @@ it('submits the link and notifies the admin', function () {
 
     $user = User::factory()->create();
 
-    $admin = User::factory()->create(['github_login' => 'benjamincrozat']);
+    $admin = User::factory()->create(['github_login' => 'carlossantosdev']);
 
     actingAs($user)
         ->get(route('links.create'))

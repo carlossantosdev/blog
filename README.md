@@ -2,9 +2,9 @@
 
 # Benjamin Crozat's blog
 
-This is the source code for my revenue-generating 20K monthly visitors [blog](https://benjamincrozat.com). It's **100% not vibe coded** BTW.
+This is the source code for my revenue-generating 20K monthly visitors [blog](https://carlossantosdev.com). It's **100% not vibe coded** BTW.
 
-**Feel free to steal whatever you need.** But first, why don't you follow me on [X](https://x.com/benjamincrozat)?
+**Feel free to steal whatever you need.** But first, why don't you follow me on [X](https://x.com/carlossantosdev)?
 
 ## What to expect
 

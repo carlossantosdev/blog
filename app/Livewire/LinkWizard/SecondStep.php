@@ -92,7 +92,7 @@ class SecondStep extends StepComponent
         ]);
 
         User::query()
-            ->where('github_login', 'benjamincrozat')
+            ->where('github_login', 'carlossantosdev')
             ->first()
             ->notify(new LinkWaitingForValidation($link));
 

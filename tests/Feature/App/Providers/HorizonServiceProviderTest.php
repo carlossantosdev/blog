@@ -7,7 +7,7 @@ use function Pest\Laravel\assertGuest;
 
 it('allows admins to access Horizon', function () {
     $user = User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     actingAs($user)

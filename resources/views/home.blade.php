@@ -10,19 +10,11 @@
         </div>
 
         <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
-            <x-btn
-                size="md"
-                wire:navigate
-                href="{{ route('authors.show', 'benjamin-crozat') }}"
-            >
+            <x-btn size="md" wire:navigate href="{{ route('authors.show', 'benjamin-crozat') }}">
                 Who the F are you?
             </x-btn>
 
-            <x-btn
-                primary
-                size="md"
-                href="#popular"
-            >
+            <x-btn primary size="md" href="#popular">
                 Start reading
             </x-btn>
         </div>
@@ -32,18 +24,13 @@
         <x-section title="Popular posts" id="popular" class="mt-24 md:mt-32">
             <x-posts-grid :posts="$popular" />
 
-            <x-btn
-                primary
-                wire:navigate
-                href="{{ route('posts.index') }}"
-                class="table mx-auto mt-16"
-            >
+            <x-btn primary wire:navigate href="{{ route('posts.index') }}" class="table mx-auto mt-16">
                 Browse all articles
             </x-btn>
         </x-section>
     @endif
 
-    <x-section
+    {{-- <x-section
         title="Great deals for developers"
         class="mt-24 md:mt-32"
     >
@@ -55,19 +42,14 @@
             <x-deals.wincher />
             <x-deals.uptimia />
         </div>
-    </x-section>
+    </x-section> --}}
 
     <x-section title="Latest posts" id="latest" class="mt-24 md:mt-32">
         @if ($latest->isNotEmpty())
             <x-posts-grid :posts="$latest" />
         @endif
 
-        <x-btn
-            primary
-            wire:navigate
-            href="{{ route('posts.index') }}"
-            class="table mx-auto mt-16"
-        >
+        <x-btn primary wire:navigate href="{{ route('posts.index') }}" class="table mx-auto mt-16">
             Browse all articles
         </x-btn>
     </x-section>
@@ -77,25 +59,17 @@
             <x-links-grid :$links />
         @endif
 
-        <x-btn
-            primary
-            wire:navigate
-            href="{{ route('links.index') }}"
-            class="table mx-auto mt-16"
-        >
+        <x-btn primary wire:navigate href="{{ route('links.index') }}" class="table mx-auto mt-16">
             Browse all links
         </x-btn>
     </x-section>
 
     @if ($aboutUser)
-        <x-section title="About {{ $aboutUser->name }}" id="about" class="mt-24 lg:max-w-(--breakpoint-md) md:mt-32">
+        <x-section title="About {{ $aboutUser->name }}" id="about"
+            class="mt-24 lg:max-w-(--breakpoint-md) md:mt-32">
             <x-prose>
-                <img
-                    loading="lazy"
-                    src="{{ $aboutUser->avatar }}"
-                    alt="{{ $aboutUser->name }}"
-                    class="float-right mt-4 ml-4 rounded-full! size-20 sm:size-28 md:size-32"
-                />
+                <img loading="lazy" src="{{ $aboutUser->avatar }}" alt="{{ $aboutUser->name }}"
+                    class="float-right mt-4 ml-4 rounded-full! size-20 sm:size-28 md:size-32" />
 
                 {!! Str::markdown($aboutUser->biography) !!}
             </x-prose>

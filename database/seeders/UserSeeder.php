@@ -10,9 +10,9 @@ class UserSeeder extends Seeder
     public function run() : void
     {
         User::factory()->create([
-            'name' => 'Benjamin Crozat',
-            'email' => 'benjamincrozat@me.com',
-            'github_login' => 'benjamincrozat',
+            'name' => 'Carlos Santos',
+            'email' => 'carlos.santos.dev@gmail.com',
+            'github_login' => 'carlossantosdev',
         ]);
 
         User::factory(10)->create();

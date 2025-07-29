@@ -16,7 +16,7 @@ it("renders with popular and latest posts, links, and the creator's about sectio
     Link::factory(15)->approved()->create();
 
     User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     get(route('home'))
@@ -25,14 +25,14 @@ it("renders with popular and latest posts, links, and the creator's about sectio
         ->assertViewHas('popular', fn (Collection $popular) => 12 === $popular->count())
         ->assertViewHas('latest', fn (Collection $latest) => 12 === $latest->count())
         ->assertViewHas('links', fn (Collection $links) => 12 === $links->count())
-        ->assertViewHas('aboutUser', fn (User $aboutUser) => 'benjamincrozat' === $aboutUser->github_login);
+        ->assertViewHas('aboutUser', fn (User $aboutUser) => 'carlossantosdev' === $aboutUser->github_login);
 });
 
 it('does not show popular posts if there are no sessions', function () {
     Post::factory(15)->create(['sessions_count' => 0]);
 
     User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     get(route('home'))

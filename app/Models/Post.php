@@ -210,7 +210,7 @@ MARKDOWN;
 
 [Read more →]($link)
 
-If you like my feed, follow me on [X](https://x.com/benjamincrozat), [LinkedIn](https://www.linkedin.com/in/benjamincrozat/), and [GitHub](https://github.com/benjamincrozat).
+If you like my feed, follow me on [X](https://x.com/carlossantosdev), [LinkedIn](https://www.linkedin.com/in/carlossantosdev/), and [GitHub](https://github.com/carlossantosdev).
 MARKDOWN ?? ''))
             ->updated($this->modified_at ?? $this->published_at)
             ->link($link)

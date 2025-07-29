@@ -5,15 +5,15 @@
             <a wire:navigate href="{{ route('posts.index') }}">Articles</a>
             <a wire:navigate href="{{ route('categories.index') }}">Categories</a>
             <a wire:navigate href="{{ route('links.index') }}">Links</a>
-            <a wire:navigate href="{{ route('advertise') }}">Advertise</a>
+            {{-- <a wire:navigate href="{{ route('advertise') }}">Advertise</a> --}}
             <a href="{{ route('home') }}#about">About</a>
-            <a href="mailto:hello@benjamincrozat.com">Contact</a>
+            <a href="mailto:carlos.santos.dev@gmail.com">Contact</a>
         </nav>
 
-        <p class="mt-8 text-center text-balance">
-            My blog is hosted on <a href="{{ route('merchants.show', 'digitalocean') }}" target="_blank">DigitalOcean</a>. Analytics provided by <a href="{{ route('merchants.show', 'pirsch-analytics') }}" target="_blank">Pirsch</a>.
-        </p>
-
-        <p class="mt-8 text-center text-gray-400">Please don't steal my content. © {{ date('Y') }} blah blah blah.</p>
+        {{-- <p class="mt-8 text-center text-balance">
+            My blog is hosted on <a href="{{ route('merchants.show', 'digitalocean') }}"
+                target="_blank">DigitalOcean</a>. Analytics provided by <a
+                href="{{ route('merchants.show', 'pirsch-analytics') }}" target="_blank">Pirsch</a>.
+        </p> --}}
     </footer>
 </div>

@@ -65,9 +65,9 @@ class Comments extends Component
 
         // We notify the admin when a new comment is
         // posted unless it's the admin himself.
-        if ('benjamincrozat' !== auth()->user()->github_login) {
+        if ('carlossantosdev' !== auth()->user()->github_login) {
             User::query()
-                ->where('github_login', 'benjamincrozat')
+                ->where('github_login', 'carlossantosdev')
                 ->first()
                 ?->notify(new NewComment($comment));
         }

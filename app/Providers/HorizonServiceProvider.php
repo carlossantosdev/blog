@@ -13,7 +13,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
     {
         parent::boot();
 
-        Horizon::routeMailNotificationsTo('hello@benjamincrozat.com');
+        Horizon::routeMailNotificationsTo('carlos.santos.dev@gmail.com');
     }
 
     protected function gate() : void

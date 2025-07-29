@@ -24,7 +24,7 @@ it('allows users to comment on a post and notifies the admin', function () {
     $user = User::factory()->create();
 
     $admin = User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     actingAs($user);
@@ -55,7 +55,7 @@ it("doesn't notify the admin if the user is the admin", function () {
     $post = Post::factory()->create();
 
     $admin = User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     actingAs($admin);
@@ -74,7 +74,7 @@ it("notifies the parent comment's author when a reply is posted", function () {
     $user = User::factory()->create();
 
     $admin = User::factory()->create([
-        'github_login' => 'benjamincrozat',
+        'github_login' => 'carlossantosdev',
     ]);
 
     $existingComment = Comment::factory()->create();

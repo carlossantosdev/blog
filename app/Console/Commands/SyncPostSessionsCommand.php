@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use App\Actions\FetchPostSessions;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-// This command uses Pirsch Analytics' API (https://benjamincrozat.com/recommends/pirsch-analytics) to fetch fresh numbers about sessions.
 #[AsCommand(
     name: 'app:sync-post-sessions',
     description: 'Fetch fresh numbers about sessions for each post'
