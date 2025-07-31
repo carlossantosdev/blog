@@ -11,9 +11,7 @@ jobs:
       CLOUDFLARE_IMAGES_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_IMAGES_ACCOUNT_ID }}
       CLOUDFLARE_IMAGES_ACCOUNT_HASH: ${{ secrets.CLOUDFLARE_IMAGES_ACCOUNT_HASH }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-      PIRSCH_ACCESS_KEY: ${{ secrets.PIRSCH_ACCESS_KEY }}
-      PIRSCH_CLIENT_ID: ${{ secrets.PIRSCH_CLIENT_ID }}
-      PIRSCH_CLIENT_SECRET: ${{ secrets.PIRSCH_CLIENT_SECRET }}
+
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
