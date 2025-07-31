@@ -11,7 +11,7 @@ class VisitorStats extends StatsOverviewWidget
 {
     protected ?string $heading = 'Visitors during the last 30 days';
 
-    protected ?string $description = 'Numbers are fetched once a day from the Pirsch Analytics API.';
+    protected ?string $description = 'Historical analytics data (no longer updating).';
 
     protected function getStats() : array
     {

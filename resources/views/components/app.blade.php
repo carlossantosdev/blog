@@ -33,11 +33,6 @@
 
     @vite('resources/css/app.css')
 
-    @if (config('app.env') === 'production')
-        <script defer src="https://api.pirsch.io/pa.js" id="pianjs" data-code="5N2hIsUQsCVX1LQtvPdJ3AGwQZHGxtt5"
-            data-disable-page-views></script>
-    @endif
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"

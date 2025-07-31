@@ -66,7 +66,7 @@
                     @endif
 
                     <x-dropdown>
-                        <x-slot:btn data-pirsch-event='Clicked "Actions"'
+                        <x-slot:btn
                             class="p-3 w-full h-full text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900">
                             <x-heroicon-o-ellipsis-horizontal class="mx-auto transition-transform size-6 md:size-7"
                                 x-bind:class="{ 'rotate-90': open }" />
@@ -80,7 +80,7 @@
                                 </x-dropdown.divider>
 
                                 <x-dropdown.item href="{{ route('filament.admin.resources.posts.edit', $post) }}"
-                                    data-pirsch-event='Clicked "Edit article"'>
+                                   >
                                     <x-heroicon-o-pencil-square class="size-4" />
                                     Edit article
                                 </x-dropdown.item>
@@ -91,12 +91,12 @@
                             </x-dropdown.divider>
 
                             <x-dropdown.item :href="'https://chatgpt.com/?q=' . urlencode($post->toPrompt())" target="_blank"
-                                data-pirsch-event='Clicked "Ask ChatGPT"'>
+                               >
                                 <x-icon-openai class="size-4" />
                                 Ask ChatGPT
                             </x-dropdown.item>
 
-                            <x-dropdown.item :href="'https://claude.ai/new?q=' . urlencode($post->toPrompt())" target="_blank" data-pirsch-event='Clicked "Ask Claude"'>
+                            <x-dropdown.item :href="'https://claude.ai/new?q=' . urlencode($post->toPrompt())" target="_blank">
                                 <x-icon-claude class="size-4" />
                                 Ask Claude
                             </x-dropdown.item>
@@ -107,7 +107,7 @@
 
                             <x-dropdown.item :href="'https://www.facebook.com/sharer/sharer.php?u=' .
                                 urlencode(route('posts.show', $post))" target="_blank"
-                                data-pirsch-event='Clicked "Share on Facebook"'>
+                               >
                                 <x-iconoir-facebook class="size-4" />
                                 Share on Facebook
                             </x-dropdown.item>
@@ -116,7 +116,7 @@
                                 urlencode(route('posts.show', $post)) .
                                 '&title=' . urlencode($post->title)"
                                 target="_blank"
-                                data-pirsch-event='Clicked"Share on LinkedIn"'>
+                               >
                                 <x-iconoir-linkedin class="size-4" />
                                 Share on LinkedIn
                             </x-dropdown.item>
@@ -125,7 +125,7 @@
                                 urlencode(route('posts.show', $post)) .
                                 '&text=' . urlencode($post->title)"
                                 target="_blank"
-                                data-pirsch-event='Clicked"Share on X"'>
+                               >
                                 <x-iconoir-x class="size-4" />
                                 Share on X
                             </x-dropdown.item>
@@ -157,7 +157,7 @@
                             @foreach ($post->recommendedPosts as $recommendedPost)
                                 <li>
                                     <a wire:navigate href="{{ route('posts.show', $recommendedPost) }}"
-                                        data-pirsch-event='Clicked on recommended post "{{ $recommendedPost->title }}"'>
+                                       >
                                         {{ trim($recommendedPost->reason, '.') }}
                                     </a>
                                 </li>
@@ -172,7 +172,7 @@
                     <ul class="flex gap-2 mt-4 md:gap-3">
                         <li>
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', $post)) }}"
-                                target="_blank" data-pirsch-event='Clicked on "Facebook"'
+                                target="_blank"
                                 class="grid place-items-center size-12 text-white bg-[#0766FF] rounded-md">
                                 <x-iconoir-facebook class="size-6" />
                                 <span class="sr-only">Facebook</span>
@@ -182,7 +182,7 @@
 
                         <li>
                             <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', $post)) }}&title={{ urlencode($post->title) }}"
-                                target="_blank" data-pirsch-event='Clicked on "LinkedIn"'
+                                target="_blank"
                                 class="grid place-items-center size-12 text-white bg-[#0B66C2] rounded-md">
                                 <x-iconoir-linkedin class="size-6" />
                                 <span class="sr-only">Linkedin</span>
@@ -191,7 +191,7 @@
 
                         <li>
                             <a href="https://x.com/intent/tweet?url={{ urlencode(route('posts.show', $post)) }}&text={{ urlencode($post->title) }}"
-                                target="_blank" data-pirsch-event='Clicked on "X"'
+                                target="_blank"
                                 class="grid place-items-center text-white bg-gray-900 rounded-md size-12">
                                 <x-iconoir-x class="size-6" />
                                 <span class="sr-only">X</span>
@@ -255,7 +255,7 @@
                                 <p>
                                     <a href="{{ $latestComment->user->github_data['user']['html_url'] }}"
                                         target="_blank" class="font-medium"
-                                        data-pirsch-event="Clicked on latest comment's username">
+                                       >
                                         {{ $latestComment->user->name }}
                                     </a>
 
@@ -270,7 +270,7 @@
 
                                 <p class="mt-1 text-right">
                                     <a href="#comments" class="font-medium underline"
-                                        data-pirsch-event='Clicked "Check comments"'>
+                                       >
                                         Check comments →
                                     </a>
                                 </p>
@@ -287,7 +287,7 @@
                     <ul class="grid gap-2 mt-4">
                         <li>
                             <a href="{{ route('feeds.main') }}"
-                                data-pirsch-event="Clicked on Atom feed in the subscribe section" class="group">
+                                class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-orange-400 rounded-md">
                                     <x-heroicon-o-rss class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">Atom feed</p>
@@ -297,7 +297,7 @@
 
                         <li>
                             <a href="https://www.linkedin.com/in/carlossantosdev/" target="_blank"
-                                data-pirsch-event="Clicked on LinkedIn in the subscribe section" class="group">
+                                class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-[#0B66C2] rounded-md">
                                     <x-iconoir-linkedin class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">LinkedIn</p>
@@ -307,7 +307,7 @@
 
                         <li>
                             <a href="https://github.com/carlossantosdev" target="_blank"
-                                data-pirsch-event="Clicked on GitHub in the subscribe section" class="group">
+                                class="group">
                                 <div
                                     class="flex gap-3 items-center px-4 py-3 bg-white rounded-md ring-1 ring-black/10">
                                     <x-iconoir-github class="size-4 translate-y-[.5px]" />
@@ -318,7 +318,7 @@
 
                         <li>
                             <a href="https://x.com/carlossantosdev" target="_blank"
-                                data-pirsch-event="Clicked on X in the subscribe section" class="group">
+                                class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-black rounded-md">
                                     <x-iconoir-x class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">X</p>
