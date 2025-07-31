@@ -8,7 +8,6 @@ Project specificities:
 - Tests are written using Pest.
 - This is a blog made with Laravel.
 - It generates money through affiliate links.
-- Visits are tracked in the backend to bypass ad blockers using Pirsch Analytics' API.
 
 Code style:
 - Take inspiration from the codebase.

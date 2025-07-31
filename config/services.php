@@ -24,13 +24,6 @@ return [
         'token' => env('HORIZON_TOKEN'),
     ],
 
-    'pirsch' => [
-        'access_key' => env('PIRSCH_ACCESS_KEY'),
-        'client_id' => env('PIRSCH_CLIENT_ID'),
-        'client_secret' => env('PIRSCH_CLIENT_SECRET'),
-        'domain_id' => env('PIRSCH_DOMAIN_ID'),
-    ],
-
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
