@@ -1,26 +1,16 @@
-<x-app
-    :canonical="$post->canonical_url"
-    :description="$post->description"
-    :hide-ad="$post->is_commercial"
-    :image="$post->image_url"
-    :title="! empty($post->serp_title) ? $post->serp_title : $post->title"
->
+<x-app :canonical="$post->canonical_url" :description="$post->description" :hide-ad="$post->is_commercial" :image="$post->image_url" :title="!empty($post->serp_title) ? $post->serp_title : $post->title">
     <div @class([
         'container',
-        '2xl:max-w-(--breakpoint-xl) grid lg:grid-cols-12 gap-16 lg:gap-12' => ! $post->is_commercial,
+        '2xl:max-w-(--breakpoint-xl) grid lg:grid-cols-12 gap-16 lg:gap-12' => !$post->is_commercial,
         'lg:max-w-(--breakpoint-md)' => $post->is_commercial,
     ])>
         <div @class([
-            'lg:col-span-8 xl:col-span-9' => ! $post->is_commercial,
+            'lg:col-span-8 xl:col-span-9' => !$post->is_commercial,
         ])>
             <article>
                 @if ($post->hasImage())
-                    <img
-                        fetchpriority="high"
-                        src="{{ $post->image_url }}"
-                        alt="{{ $post->title }}"
-                        class="object-cover mb-12 w-full rounded-xl ring-1 shadow-xl md:mb-16 ring-black/5 aspect-video"
-                    />
+                    <img fetchpriority="high" src="{{ $post->image_url }}" alt="{{ $post->title }}"
+                        class="object-cover mb-12 w-full rounded-xl ring-1 shadow-xl md:mb-16 ring-black/5 aspect-video" />
                 @endif
 
                 <p class="text-sm font-normal tracking-widest text-center uppercase md:text-base">
@@ -28,11 +18,13 @@
                     read
                 </p>
 
-                <h1 class="mt-2 font-medium tracking-tight text-center text-black text-balance text-3xl/none sm:text-4xl/none lg:text-5xl/none">
+                <h1
+                    class="mt-2 font-medium tracking-tight text-center text-black text-balance text-3xl/none sm:text-4xl/none lg:text-5xl/none">
                     {{ $post->title }}
                 </h1>
 
-                <div class="grid grid-cols-2 gap-4 mt-12 text-sm leading-tight md:mt-16 md:grid-flow-col md:grid-cols-none md:auto-cols-fr">
+                <div
+                    class="grid grid-cols-2 gap-4 mt-12 text-sm leading-tight md:mt-16 md:grid-flow-col md:grid-cols-none md:auto-cols-fr">
                     <div class="p-3 text-center bg-gray-50 rounded-lg">
                         <x-heroicon-o-calendar class="mx-auto mb-2 opacity-75 size-6" />
 
@@ -46,27 +38,21 @@
 
                         <br />
 
-                        {{ ($post->modified_at ?? $post->published_at ?? $post->created_at)->isoFormat('ll') }}
+                        {{ ($post->modified_at ?? ($post->published_at ?? $post->created_at))->isoFormat('ll') }}
                     </div>
 
-                    <a
-                        wire:navigate
-                        href="{{ route('authors.show', $post->user) }}"
-                    >
-                        <div class="p-3 text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900">
-                            <img
-                                loading="lazy"
-                                src="{{ $post->user->avatar }}"
-                                alt="{{ $post->user->name }}"
-                                class="mx-auto mb-2 rounded-full size-6"
-                            />
+                    <a wire:navigate href="{{ route('authors.show', $post->user) }}">
+                        <div
+                            class="p-3 text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900">
+                            <img loading="lazy" src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"
+                                class="mx-auto mb-2 rounded-full size-6" />
 
                             Written by<br />
                             {{ $post->user->name }}
                         </div>
                     </a>
 
-                    @if (! $post->is_commercial)
+                    @if (!$post->is_commercial)
                         <a href="#comments">
                             <div @class([
                                 'flex-1 p-3 text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900',
@@ -80,14 +66,10 @@
                     @endif
 
                     <x-dropdown>
-                        <x-slot:btn
-                            data-pirsch-event='Clicked "Actions"'
-                            class="p-3 w-full h-full text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900"
-                        >
-                            <x-heroicon-o-ellipsis-horizontal
-                                class="mx-auto transition-transform size-6 md:size-7"
-                                x-bind:class="{ 'rotate-90': open }"
-                            />
+                        <x-slot:btn data-pirsch-event='Clicked "Actions"'
+                            class="p-3 w-full h-full text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900">
+                            <x-heroicon-o-ellipsis-horizontal class="mx-auto transition-transform size-6 md:size-7"
+                                x-bind:class="{ 'rotate-90': open }" />
                             Actions
                         </x-slot>
 
@@ -97,10 +79,8 @@
                                     Admin
                                 </x-dropdown.divider>
 
-                                <x-dropdown.item
-                                    href="{{ route('filament.admin.resources.posts.edit', $post) }}"
-                                    data-pirsch-event='Clicked "Edit article"'
-                                >
+                                <x-dropdown.item href="{{ route('filament.admin.resources.posts.edit', $post) }}"
+                                    data-pirsch-event='Clicked "Edit article"'>
                                     <x-heroicon-o-pencil-square class="size-4" />
                                     Edit article
                                 </x-dropdown.item>
@@ -110,20 +90,13 @@
                                 Chat
                             </x-dropdown.divider>
 
-                            <x-dropdown.item
-                                :href="'https://chatgpt.com/?q=' . urlencode($post->toPrompt())"
-                                target="_blank"
-                                data-pirsch-event='Clicked "Ask ChatGPT"'
-                            >
+                            <x-dropdown.item :href="'https://chatgpt.com/?q=' . urlencode($post->toPrompt())" target="_blank"
+                                data-pirsch-event='Clicked "Ask ChatGPT"'>
                                 <x-icon-openai class="size-4" />
                                 Ask ChatGPT
                             </x-dropdown.item>
 
-                            <x-dropdown.item
-                                :href="'https://claude.ai/new?q=' . urlencode($post->toPrompt())"
-                                target="_blank"
-                                data-pirsch-event='Clicked "Ask Claude"'
-                            >
+                            <x-dropdown.item :href="'https://claude.ai/new?q=' . urlencode($post->toPrompt())" target="_blank" data-pirsch-event='Clicked "Ask Claude"'>
                                 <x-icon-claude class="size-4" />
                                 Ask Claude
                             </x-dropdown.item>
@@ -132,29 +105,27 @@
                                 Share
                             </x-dropdown.divider>
 
-                            <x-dropdown.item
-                                :href="'https://www.facebook.com/sharer/sharer.php?u=' . urlencode(route('posts.show', $post))"
-                                target="_blank"
-                                data-pirsch-event='Clicked "Share on Facebook"'
-                            >
+                            <x-dropdown.item :href="'https://www.facebook.com/sharer/sharer.php?u=' .
+                                urlencode(route('posts.show', $post))" target="_blank"
+                                data-pirsch-event='Clicked "Share on Facebook"'>
                                 <x-iconoir-facebook class="size-4" />
                                 Share on Facebook
                             </x-dropdown.item>
 
-                            <x-dropdown.item
-                                :href="'https://www.linkedin.com/shareArticle?mini=true&url=' . urlencode(route('posts.show', $post)) . '&title=' . urlencode($post->title)"
+                            <x-dropdown.item :href="'https://www.linkedin.com/shareArticle?mini=true&url=' .
+                                urlencode(route('posts.show', $post)) .
+                                '&title=' . urlencode($post->title)"
                                 target="_blank"
-                                data-pirsch-event='Clicked "Share on LinkedIn"'
-                            >
+                                data-pirsch-event='Clicked"Share on LinkedIn"'>
                                 <x-iconoir-linkedin class="size-4" />
                                 Share on LinkedIn
                             </x-dropdown.item>
 
-                            <x-dropdown.item
-                                :href="'https://x.com/intent/tweet?url=' . urlencode(route('posts.show', $post)) . '&text=' . urlencode($post->title)"
+                            <x-dropdown.item :href="'https://x.com/intent/tweet?url=' .
+                                urlencode(route('posts.show', $post)) .
+                                '&text=' . urlencode($post->title)"
                                 target="_blank"
-                                data-pirsch-event='Clicked "Share on X"'
-                            >
+                                data-pirsch-event='Clicked"Share on X"'>
                                 <x-iconoir-x class="size-4" />
                                 Share on X
                             </x-dropdown.item>
@@ -162,11 +133,8 @@
                     </x-dropdown>
                 </div>
 
-                @if (! empty($headings = extract_headings_from_markdown($post->content)))
-                    <x-table-of-contents
-                        :$headings
-                        class="mt-4 ml-0"
-                    />
+                @if (!empty(($headings = extract_headings_from_markdown($post->content))))
+                    <x-table-of-contents :$headings class="mt-4 ml-0" />
                 @endif
 
                 <x-prose class="mt-8">
@@ -180,7 +148,7 @@
                         </p>
                     @endif
 
-                    @if (! empty($post->recommendedPosts) && ! $post->is_commercial)
+                    @if (!empty($post->recommendedPosts) && !$post->is_commercial)
                         <hr />
 
                         <p>Did you like this article? Then, keep learning:</p>
@@ -188,11 +156,8 @@
                         <ul>
                             @foreach ($post->recommendedPosts as $recommendedPost)
                                 <li>
-                                    <a
-                                        wire:navigate
-                                        href="{{ route('posts.show', $recommendedPost) }}"
-                                        data-pirsch-event='Clicked on recommended post "{{ $recommendedPost->title }}"'
-                                    >
+                                    <a wire:navigate href="{{ route('posts.show', $recommendedPost) }}"
+                                        data-pirsch-event='Clicked on recommended post "{{ $recommendedPost->title }}"'>
                                         {{ trim($recommendedPost->reason, '.') }}
                                     </a>
                                 </li>
@@ -206,12 +171,9 @@
 
                     <ul class="flex gap-2 mt-4 md:gap-3">
                         <li>
-                            <a
-                                href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', $post)) }}"
-                                target="_blank"
-                                data-pirsch-event='Clicked on "Facebook"'
-                                class="grid place-items-center size-12 text-white bg-[#0766FF] rounded-md"
-                            >
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(route('posts.show', $post)) }}"
+                                target="_blank" data-pirsch-event='Clicked on "Facebook"'
+                                class="grid place-items-center size-12 text-white bg-[#0766FF] rounded-md">
                                 <x-iconoir-facebook class="size-6" />
                                 <span class="sr-only">Facebook</span>
                             </a>
@@ -219,24 +181,18 @@
 
 
                         <li>
-                            <a
-                                href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', $post)) }}&title={{ urlencode($post->title) }}"
-                                target="_blank"
-                                data-pirsch-event='Clicked on "LinkedIn"'
-                                class="grid place-items-center size-12 text-white bg-[#0B66C2] rounded-md"
-                            >
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ urlencode(route('posts.show', $post)) }}&title={{ urlencode($post->title) }}"
+                                target="_blank" data-pirsch-event='Clicked on "LinkedIn"'
+                                class="grid place-items-center size-12 text-white bg-[#0B66C2] rounded-md">
                                 <x-iconoir-linkedin class="size-6" />
                                 <span class="sr-only">Linkedin</span>
                             </a>
                         </li>
 
                         <li>
-                            <a
-                                href="https://x.com/intent/tweet?url={{ urlencode(route('posts.show', $post)) }}&text={{ urlencode($post->title) }}"
-                                target="_blank"
-                                data-pirsch-event='Clicked on "X"'
-                                class="grid place-items-center text-white bg-gray-900 rounded-md size-12"
-                            >
+                            <a href="https://x.com/intent/tweet?url={{ urlencode(route('posts.show', $post)) }}&text={{ urlencode($post->title) }}"
+                                target="_blank" data-pirsch-event='Clicked on "X"'
+                                class="grid place-items-center text-white bg-gray-900 rounded-md size-12">
                                 <x-iconoir-x class="size-6" />
                                 <span class="sr-only">X</span>
                             </a>
@@ -245,7 +201,7 @@
                 </div>
             </article>
 
-            @if (! $post->is_commercial)
+            @if (!$post->is_commercial)
                 <div class="mt-24">
                     <livewire:comments :post-id="$post->id" />
                 </div>
@@ -267,7 +223,7 @@
             @endif
         </div>
 
-        @if (! $post->is_commercial)
+        @if (!$post->is_commercial)
             <div class="lg:col-span-4 xl:col-span-3">
                 {{-- Just in case I don't think about switching the ads. --}}
                 @if (now()->isAfter('2025-08-03'))
@@ -278,7 +234,9 @@
 
                 <a href="{{ route('deals') }}" class="hidden lg:block">
                     <p class="p-4 mt-4 leading-tight rounded-xl text-balance bg-gray-100/75">
-                        <strong class="font-medium">I have even more deals for developers.</strong> Services, apps, and all kinds of tools at a discount. <span class="font-medium underline">Check available deals →</span>
+                        <strong class="font-medium">I have even more deals for developers.</strong> Services, apps, and
+                        all kinds of tools at a discount. <span class="font-medium underline">Check available deals
+                            →</span>
                     </p>
                 </a>
 
@@ -289,21 +247,15 @@
                         </p>
 
                         <div class="flex gap-4 mt-4">
-                            <img
-                                loading="lazy"
-                                src="{{ $latestComment->user->avatar }}"
+                            <img loading="lazy" src="{{ $latestComment->user->avatar }}"
                                 alt="{{ $latestComment->user->name }}"
-                                class="flex-none mt-1 rounded-full ring-1 shadow-sm shadow-black/5 ring-black/10 size-7 md:size-8"
-                            />
+                                class="flex-none mt-1 rounded-full ring-1 shadow-sm shadow-black/5 ring-black/10 size-7 md:size-8" />
 
                             <div>
                                 <p>
-                                    <a
-                                        href="{{ $latestComment->user->github_data['user']['html_url'] }}"
-                                        target="_blank"
-                                        class="font-medium"
-                                        data-pirsch-event="Clicked on latest comment's username"
-                                    >
+                                    <a href="{{ $latestComment->user->github_data['user']['html_url'] }}"
+                                        target="_blank" class="font-medium"
+                                        data-pirsch-event="Clicked on latest comment's username">
                                         {{ $latestComment->user->name }}
                                     </a>
 
@@ -317,11 +269,8 @@
                                 </x-prose>
 
                                 <p class="mt-1 text-right">
-                                    <a
-                                        href="#comments"
-                                        class="font-medium underline"
-                                        data-pirsch-event='Clicked "Check comments"'
-                                    >
+                                    <a href="#comments" class="font-medium underline"
+                                        data-pirsch-event='Clicked "Check comments"'>
                                         Check comments →
                                     </a>
                                 </p>
@@ -337,11 +286,8 @@
 
                     <ul class="grid gap-2 mt-4">
                         <li>
-                            <a
-                                href="{{ route('feeds.main') }}"
-                                data-pirsch-event="Clicked on Atom feed in the subscribe section"
-                                class="group"
-                            >
+                            <a href="{{ route('feeds.main') }}"
+                                data-pirsch-event="Clicked on Atom feed in the subscribe section" class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-orange-400 rounded-md">
                                     <x-heroicon-o-rss class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">Atom feed</p>
@@ -350,12 +296,8 @@
                         </li>
 
                         <li>
-                            <a
-                                href="https://www.linkedin.com/in/benjamincrozat/"
-                                target="_blank"
-                                data-pirsch-event="Clicked on LinkedIn in the subscribe section"
-                                class="group"
-                            >
+                            <a href="https://www.linkedin.com/in/carlossantosdev/" target="_blank"
+                                data-pirsch-event="Clicked on LinkedIn in the subscribe section" class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-[#0B66C2] rounded-md">
                                     <x-iconoir-linkedin class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">LinkedIn</p>
@@ -364,13 +306,10 @@
                         </li>
 
                         <li>
-                            <a
-                                href="https://github.com/benjamincrozat"
-                                target="_blank"
-                                data-pirsch-event="Clicked on GitHub in the subscribe section"
-                                class="group"
-                            >
-                                <div class="flex gap-3 items-center px-4 py-3 bg-white rounded-md ring-1 ring-black/10">
+                            <a href="https://github.com/carlossantosdev" target="_blank"
+                                data-pirsch-event="Clicked on GitHub in the subscribe section" class="group">
+                                <div
+                                    class="flex gap-3 items-center px-4 py-3 bg-white rounded-md ring-1 ring-black/10">
                                     <x-iconoir-github class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">GitHub</p>
                                 </div>
@@ -378,12 +317,8 @@
                         </li>
 
                         <li>
-                            <a
-                                href="https://x.com/benjamincrozat"
-                                target="_blank"
-                                data-pirsch-event="Clicked on X in the subscribe section"
-                                class="group"
-                            >
+                            <a href="https://x.com/carlossantosdev" target="_blank"
+                                data-pirsch-event="Clicked on X in the subscribe section" class="group">
                                 <div class="flex gap-3 items-center px-4 py-3 text-white bg-black rounded-md">
                                     <x-iconoir-x class="size-4 translate-y-[.5px]" />
                                     <p class="font-medium">X</p>

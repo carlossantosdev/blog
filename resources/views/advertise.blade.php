@@ -53,10 +53,7 @@
         </div>
     </x-section>
 
-    <x-section
-        title="How to show off your product"
-        class="mt-24 md:max-w-screen-sm"
-    >
+    <x-section title="How to show off your product" class="mt-24 md:max-w-screen-sm">
         <p>Your options right now are:</p>
 
         <ul class="grid gap-2 mt-2 ml-4 list-disc list-inside">
@@ -84,7 +81,8 @@
         </ul>
 
         <p class="mt-4">
-            Interested? <a href="mailto:hello@benjamincrozat.com" class="font-medium underline">Get in touch</a> with me.
+            Interested? <a href="mailto:carlos.santos.dev@gmail.com" class="font-medium underline">Get in touch</a> with
+            me.
         </p>
     </x-section>
 </x-app>

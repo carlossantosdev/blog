@@ -15,17 +15,20 @@ use App\Http\Controllers\Advertising\RedirectToAdvertiserController;
 Route::get('/', HomeController::class)
     ->name('home');
 
-Route::get('/blog', ListPostsController::class)
-    ->name('posts.index');
+Route::prefix('blog')->group(function() {
+    Route::get('', ListPostsController::class)
+        ->name('posts.index');
+    
+    Route::get('/authors/{user:slug}', ShowAuthorController::class)
+        ->name('authors.show');
+    
+    Route::get('/categories', ListCategoriesController::class)
+        ->name('categories.index');
+    
+    Route::get('/categories/{category:slug}', ShowCategoryController::class)
+        ->name('categories.show');
+});
 
-Route::get('/authors/{user:slug}', ShowAuthorController::class)
-    ->name('authors.show');
-
-Route::get('/categories', ListCategoriesController::class)
-    ->name('categories.index');
-
-Route::get('/categories/{category:slug}', ShowCategoryController::class)
-    ->name('categories.show');
 
 Route::view('/deals', 'deals')
     ->name('deals');
@@ -39,9 +42,6 @@ Route::get('/links', ListLinksController::class)
 
 Route::get('/advertise', App\Http\Controllers\Advertising\ShowAdvertisingLandingPageController::class)
     ->name('advertise');
-    
-Route::get('/links/create', LinkWizard::class)
-    ->name('links.create');
 
 Route::get('/redirect/{slug}', RedirectToAdvertiserController::class)
     ->name('redirect-to-advertiser');
