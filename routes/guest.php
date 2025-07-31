@@ -15,20 +15,19 @@ use App\Http\Controllers\Advertising\RedirectToAdvertiserController;
 Route::get('/', HomeController::class)
     ->name('home');
 
-Route::prefix('blog')->group(function() {
+Route::prefix('blog')->group(function () {
     Route::get('', ListPostsController::class)
         ->name('posts.index');
-    
+
     Route::get('/authors/{user:slug}', ShowAuthorController::class)
         ->name('authors.show');
-    
+
     Route::get('/categories', ListCategoriesController::class)
         ->name('categories.index');
-    
+
     Route::get('/categories/{category:slug}', ShowCategoryController::class)
         ->name('categories.show');
 });
-
 
 Route::view('/deals', 'deals')
     ->name('deals');
