@@ -5,18 +5,24 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\GithubAuthCallbackController;
 use App\Http\Controllers\Auth\GithubAuthRedirectController;
 use App\Http\Controllers\Impersonation\LeaveImpersonationController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 Route::middleware('guest')
     ->group(function () {
         Route::view('/login', 'login')
             ->name('login');
-
-        Route::get('/auth/redirect', GithubAuthRedirectController::class)
-            ->name('auth.redirect');
-
-        Route::get('/auth/callback', GithubAuthCallbackController::class)
-            ->name('auth.callback');
     });
+
+Route::prefix('/auth')->name('auth.')->group(function () {
+    Route::middleware(RedirectIfAuthenticated::class)
+        ->group(function () {
+            Route::get('/gh/redirect', GithubAuthRedirectController::class)
+                ->name('redirect');
+
+            Route::get('/gh/callback', GithubAuthCallbackController::class)
+                ->name('callback');
+        });
+});
 
 Route::middleware('auth')
     ->group(function () {
