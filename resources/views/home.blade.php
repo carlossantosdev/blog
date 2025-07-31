@@ -1,30 +1,13 @@
 <x-app>
     <div class="container text-center">
-        <div class="font-medium tracking-tight text-black text-4xl/none md:text-5xl lg:text-7xl text-balance">
-            <span class="text-blue-600">{{ Number::format($visitors) }}</span> monthly visitors read my blog
-        </div>
-
-        <div class="mt-5 tracking-tight text-black/75 text-lg/tight sm:text-xl/tight md:text-2xl/tight md:mt-8">
-            No matter how senior,<br />
-            I have something for you. Ready?
-        </div>
-
-        <div class="flex gap-2 justify-center items-center mt-7 text-center md:mt-11">
-            <x-btn size="md" wire:navigate href="{{ route('authors.show', 'benjamin-crozat') }}">
-                Who the F are you?
-            </x-btn>
-
-            <x-btn primary size="md" href="#popular">
-                Start reading
-            </x-btn>
-        </div>
+        <x-hero-section />
     </div>
 
     @if ($popular->isNotEmpty())
         <x-section title="Popular posts" id="popular" class="mt-24 md:mt-32">
             <x-posts-grid :posts="$popular" />
 
-            <x-btn primary wire:navigate href="{{ route('posts.index') }}" class="table mx-auto mt-16">
+            <x-btn primary wire:navigate href="{{ route('blog.posts.index') }}" class="table mx-auto mt-16">
                 Browse all articles
             </x-btn>
         </x-section>
@@ -49,7 +32,7 @@
             <x-posts-grid :posts="$latest" />
         @endif
 
-        <x-btn primary wire:navigate href="{{ route('posts.index') }}" class="table mx-auto mt-16">
+        <x-btn primary wire:navigate href="{{ route('blog.posts.index') }}" class="table mx-auto mt-16">
             Browse all articles
         </x-btn>
     </x-section>

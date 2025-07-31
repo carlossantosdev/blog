@@ -38,9 +38,10 @@
             data-disable-page-views></script>
     @endif
 
-    <link rel="preload" as="style"
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@200..800&display=swap"
-        onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
 
     <noscript>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@200..800&display=swap" />
@@ -74,12 +75,12 @@
         @endempty
 
         @empty($hideNavigation)
-            <header class="container mt-4 xl:max-w-(--breakpoint-lg)">
+            <header class="container mt-10 xl:max-w-(--breakpoint-lg)">
                 <x-nav />
             </header>
         @endempty
 
-        <main @class(['grow', 'py-12 md:py-16' => empty($hideNavigation)])>
+        <main @class(['grow', 'py-12' => empty($hideNavigation)])>
             {{ $slot }}
         </main>
 

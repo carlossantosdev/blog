@@ -12,7 +12,7 @@
     --breakpoint-2xl: 1440px;
 
     --font-sans:
-        Outfit, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "JetBrains Mono", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
         "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 

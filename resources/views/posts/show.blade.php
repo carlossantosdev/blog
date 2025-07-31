@@ -41,7 +41,7 @@
                         {{ ($post->modified_at ?? ($post->published_at ?? $post->created_at))->isoFormat('ll') }}
                     </div>
 
-                    <a wire:navigate href="{{ route('authors.show', $post->user) }}">
+                    <a wire:navigate href="{{ route('blog.authors.show', $post->user) }}">
                         <div
                             class="p-3 text-center bg-gray-50 rounded-lg transition-colors hover:bg-blue-50 hover:text-blue-900">
                             <img loading="lazy" src="{{ $post->user->avatar }}" alt="{{ $post->user->name }}"

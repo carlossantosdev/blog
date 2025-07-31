@@ -12,12 +12,16 @@
 
     <div class="grow"></div>
 
-    <x-nav.item active-icon="heroicon-s-fire" icon="heroicon-o-fire" href="{{ route('posts.index') }}">
+    <x-nav.item active-icon="heroicon-s-fire" icon="heroicon-o-fire" href="{{ route('blog.posts.index') }}">
         Latest
     </x-nav.item>
 
-    <x-nav.item active-icon="si-laravel" icon="fab-laravel" href="{{ route('posts.index') }}">
+    <x-nav.item active-icon="si-laravel" icon="fab-laravel" href="{{ route('blog.categories.show', 'laravel') }}">
         Laravel
+    </x-nav.item>
+
+    <x-nav.item active-icon="eos-ai" icon="eos-ai" href="{{ route('blog.categories.show', 'ai') }}">
+        AI
     </x-nav.item>
 
     {{-- <x-nav.item active-icon="heroicon-s-link" icon="heroicon-o-link" href="{{ route('links.index') }}">
@@ -78,11 +82,6 @@
                 </form>
             </x-slot>
         </x-dropdown>
-    @else
-        <x-nav.item no-wire-navigate href="{{ route('auth.redirect') }}" icon="iconoir-github"
-            data-pirsch-event='Clicked "Sign in"'>
-            Sign in
-        </x-nav.item>
     @endauth
 
     <x-dropdown>
@@ -97,7 +96,7 @@
                 More
             </x-dropdown.divider>
 
-            <x-dropdown.item icon="heroicon-o-tag" wire:navigate href="{{ route('categories.index') }}"
+            <x-dropdown.item icon="heroicon-o-tag" wire:navigate href="{{ route('blog.categories.index') }}"
                 data-pirsch-event='Clicked "Categories"'>
                 Categories
             </x-dropdown.item>

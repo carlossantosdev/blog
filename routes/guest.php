@@ -15,7 +15,10 @@ use App\Http\Controllers\Advertising\RedirectToAdvertiserController;
 Route::get('/', HomeController::class)
     ->name('home');
 
-Route::prefix('blog')->group(function () {
+Route::get('/about', HomeController::class)
+    ->name('about');
+
+Route::prefix('blog')->name('blog.')->group(function () {
     Route::get('', ListPostsController::class)
         ->name('posts.index');
 
