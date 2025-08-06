@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\LinkWizard\LinkWizard;
 use App\Http\Controllers\HomeController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\Advertising\RedirectToAdvertiserController;
 Route::get('/', HomeController::class)
     ->name('home');
 
-Route::get('/about', HomeController::class)
+Route::get('/about', [AboutController::class, 'show'])
     ->name('about');
 
 Route::prefix('blog')->name('blog.')->group(function () {
