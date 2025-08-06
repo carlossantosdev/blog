@@ -1,7 +1,7 @@
 <div class="bg-gradient-to-r from-blue-50 to-green-50">
     <div class="relative isolate">
         <svg aria-hidden="true"
-            class="absolute inset-x-0 top-0 -z-10 h-256 w-full mask-[radial-gradient(32rem_32rem_at_center,white,transparent)] stroke-gray-200">
+            class="absolute inset-x-0 top-0 -z-10 h-128 w-full mask-[radial-gradient(32rem_32rem_at_center,white,transparent)] stroke-gray-200">
             <defs>
                 <pattern id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84" width="200" height="200" x="50%" y="-1"
                     patternUnits="userSpaceOnUse">
