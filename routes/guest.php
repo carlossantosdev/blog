@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\LinkWizard\LinkWizard;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Posts\ShowPostController;
 use App\Http\Controllers\Links\ListLinksController;
 use App\Http\Controllers\Posts\ListPostsController;
@@ -11,7 +11,6 @@ use App\Http\Controllers\Authors\ShowAuthorController;
 use App\Http\Controllers\Merchants\ShowMerchantController;
 use App\Http\Controllers\Categories\ShowCategoryController;
 use App\Http\Controllers\Categories\ListCategoriesController;
-use App\Http\Controllers\Advertising\RedirectToAdvertiserController;
 
 Route::get('/', HomeController::class)
     ->name('home');
@@ -42,12 +41,6 @@ Route::get('/links/create', LinkWizard::class)
 
 Route::get('/links', ListLinksController::class)
     ->name('links.index');
-
-Route::get('/advertise', App\Http\Controllers\Advertising\ShowAdvertisingLandingPageController::class)
-    ->name('advertise');
-
-Route::get('/redirect/{slug}', RedirectToAdvertiserController::class)
-    ->name('redirect-to-advertiser');
 
 Route::get('/recommends/{slug}', ShowMerchantController::class)
     ->name('merchants.show');

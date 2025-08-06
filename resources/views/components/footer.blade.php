@@ -5,7 +5,6 @@
             <a wire:navigate href="{{ route('blog.posts.index') }}">Articles</a>
             <a wire:navigate href="{{ route('blog.categories.index') }}">Categories</a>
             <a wire:navigate href="{{ route('links.index') }}">Links</a>
-            {{-- <a wire:navigate href="{{ route('advertise') }}">Advertise</a> --}}
             <a href="{{ route('home') }}#about">About</a>
             <a href="mailto:carlos.santos.dev@gmail.com">Contact</a>
         </nav>

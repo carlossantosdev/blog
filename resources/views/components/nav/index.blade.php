@@ -24,14 +24,6 @@
         AI
     </x-nav.item>
 
-    {{-- <x-nav.item active-icon="heroicon-s-link" icon="heroicon-o-link" href="{{ route('links.index') }}">
-        Links
-    </x-nav.item>
-
-    <x-nav.item active-icon="heroicon-s-gift" icon="heroicon-o-gift" href="{{ route('deals') }}">
-        For you
-    </x-nav.item> --}}
-
     @auth
         <x-dropdown>
             <x-slot:btn>
@@ -96,10 +88,6 @@
                 Categories
             </x-dropdown.item>
 
-            <x-dropdown.item icon="heroicon-o-megaphone" wire:navigate href="{{ route('advertise') }}">
-                Advertise
-            </x-dropdown.item>
-
             <x-dropdown.item icon="heroicon-o-question-mark-circle" href="{{ route('home') }}#about">
                 About me
             </x-dropdown.item>
@@ -109,22 +97,8 @@
             </x-dropdown.item>
 
             <x-dropdown.divider>
-                Freebies
-            </x-dropdown.divider>
-
-            <x-dropdown.item icon="iconoir-git-fork"
-                description="This blog is open source and the codebase becomes bigger fast. There's a lot to learn and this is free."
-                href="https://github.com/carlossantosdev/blog" target="_blank">
-                Fork the source code
-            </x-dropdown.item>
-
-            <x-dropdown.divider>
                 Follow me
             </x-dropdown.divider>
-
-            <x-dropdown.item icon="heroicon-o-rss" href="{{ route('feeds.main') }}">
-                Atom feed
-            </x-dropdown.item>
 
             <x-dropdown.item icon="iconoir-github" href="https://github.com/carlossantosdev" target="_blank">
                 GitHub
@@ -137,6 +111,17 @@
             <x-dropdown.item icon="iconoir-x" href="https://x.com/carlossantosdev" target="_blank">
                 X
             </x-dropdown.item>
+
+            <x-dropdown.divider>
+                This blog
+            </x-dropdown.divider>
+
+            <x-dropdown.item icon="iconoir-git-fork"
+                description="This blog is open source and the codebase becomes bigger fast. There's a lot to learn and this is free."
+                href="https://github.com/carlossantosdev/blog" target="_blank">
+                Fork the source code
+            </x-dropdown.item>
+
         </x-slot>
     </x-dropdown>
 </nav>

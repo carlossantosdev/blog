@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Link;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -32,16 +30,6 @@ class HomeController extends Controller
         // would have loaded the relationships twice later in the view.
         $popular->concat($latest)->load('categories', 'user');
 
-        $links = Link::query()
-            ->latest('is_approved')
-            ->approved()
-            ->limit(12)
-            ->get();
-
-        $aboutUser = User::query()
-            ->where('github_login', 'carlossantosdev')
-            ->first();
-
-        return view('home', compact('popular', 'latest', 'links', 'aboutUser'));
+        return view('home', compact('popular', 'latest'));
     }
 }

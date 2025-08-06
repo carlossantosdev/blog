@@ -225,12 +225,7 @@
 
         @if (!$post->is_commercial)
             <div class="lg:col-span-4 xl:col-span-3">
-                {{-- Just in case I don't think about switching the ads. --}}
-                @if (now()->isAfter('2025-08-03'))
-                    <x-ads.sidebar.sevalla class="max-w-[280px] mx-auto lg:max-w-none lg:mx-0" />
-                @else
-                    <x-ads.sidebar.vemetric class="max-w-[280px] mx-auto lg:max-w-none lg:mx-0" />
-                @endif
+
 
                 <a href="{{ route('deals') }}" class="hidden lg:block">
                     <p class="p-4 mt-4 leading-tight rounded-xl text-balance bg-gray-100/75">

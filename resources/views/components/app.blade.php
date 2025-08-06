@@ -65,9 +65,7 @@
             </div>
         @endif
 
-        @empty($hideAd)
-            <x-ads.top.next-event />
-        @endempty
+
 
         @empty($hideNavigation)
             <header class="container mt-10 xl:max-w-(--breakpoint-lg)">
