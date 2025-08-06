@@ -88,7 +88,7 @@
                 Categories
             </x-dropdown.item>
 
-            <x-dropdown.item icon="heroicon-o-question-mark-circle" href="{{ route('home') }}#about">
+            <x-dropdown.item icon="heroicon-o-question-mark-circle" href="{{ route('about') }}">
                 About me
             </x-dropdown.item>
 
