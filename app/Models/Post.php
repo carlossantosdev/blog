@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -100,11 +99,6 @@ class Post extends Model implements Feedable
     public function comments() : HasMany
     {
         return $this->hasMany(Comment::class);
-    }
-
-    public function link() : HasOne
-    {
-        return $this->hasOne(Link::class);
     }
 
     public function formattedContent() : Attribute
@@ -193,7 +187,6 @@ MARKDOWN;
     {
         return static::query()
             ->published()
-            ->whereDoesntHave('link')
             ->latest('published_at')
             ->limit(50)
             ->get();

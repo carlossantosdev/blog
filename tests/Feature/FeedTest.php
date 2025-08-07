@@ -1,19 +1,16 @@
 <?php
 
-use App\Models\Link;
 use App\Models\Post;
 
 use function Pest\Laravel\get;
 
-it('lists the latest 50 posts that are not associated to a link and shows the description instead of the content', function () {
+it('lists the latest 50 posts and shows the description instead of the content', function () {
     $posts = Post::factory(30)->create();
-
-    Link::factory(10)->create();
 
     $response = get(route('feeds.main'))
         ->assertOk();
 
-    expect(Post::count())->toBe(40);
+    expect(Post::count())->toBe(30);
 
     expect($posts)->toHaveCount(30);
 

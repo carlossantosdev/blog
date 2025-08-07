@@ -280,13 +280,9 @@ it('generates valid Markdown with YAML front matter via toMarkdown()', function 
         ->and($markdown)->toContain('# Foo Bar');
 });
 
-it('getFeedItems only returns the 50 most recent published posts without links', function () {
+it('getFeedItems only returns the 50 most recent published posts', function () {
     // 60 published posts without links.
     Post::factory(60)->create(['published_at' => now()]);
-
-    // One published post with a link – should be excluded.
-    $withLink = Post::factory()->create(['published_at' => now()]);
-    \App\Models\Link::factory()->create(['post_id' => $withLink->id]);
 
     // One unpublished post – should be excluded.
     Post::factory()->create(['published_at' => null]);
@@ -298,8 +294,6 @@ it('getFeedItems only returns the 50 most recent published posts without links',
     // Ensure ordering (latest first)
     expect($feedItems->first()->published_at->greaterThanOrEqualTo($feedItems->last()->published_at))->toBeTrue();
 
-    // Ensure excluded post with link is not present
-    expect($feedItems->pluck('id'))->not->toContain($withLink->id);
 });
 
 it('converts a post to a valid FeedItem via toFeedItem()', function () {
@@ -336,12 +330,4 @@ it('has many comments and counts them automatically', function () {
 
     expect($post->comments)->toHaveCount(3)
         ->and($post->comments_count)->toBe(3);
-});
-
-it('has one link', function () {
-    $post = Post::factory()->create();
-    $link = \App\Models\Link::factory()->create(['post_id' => $post->id]);
-
-    expect($post->link)->toBeInstanceOf(\App\Models\Link::class)
-        ->and($post->link->is($link))->toBeTrue();
 });

@@ -39,5 +39,4 @@ it('generates a sitemap with the most important pages', function () {
         ->cursor()
         ->each(fn (Category $category) => expect($content)->toContain(route('categories.show', $category)));
 
-    expect($content)->toContain(route('links.index'));
 });

@@ -31,7 +31,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
-use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -247,18 +246,6 @@ class PostResource extends Resource
                         true: fn (Builder $query) => $query->whereNotNull('image_path'),
                         false: fn (Builder $query) => $query->whereNull('image_path'),
                     ),
-
-                SelectFilter::make('link_association')
-                    ->label('Link association')
-                    ->options([
-                        'with_link' => 'With link',
-                        'without_link' => 'Without link',
-                    ])
-                    ->query(fn (Builder $query, array $data) => match ($data['value']) {
-                        'with_link' => $query->whereHas('link'),
-                        'without_link' => $query->whereDoesntHave('link'),
-                        default => $query,
-                    }),
 
                 TernaryFilter::make('published_at')
                     ->nullable()

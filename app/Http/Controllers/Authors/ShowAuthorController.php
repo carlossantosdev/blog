@@ -17,11 +17,6 @@ class ShowAuthorController extends Controller
                 ->latest('published_at')
                 ->published()
                 ->paginate(12),
-
-            'links' => $user->links()
-                ->latest('is_approved')
-                ->approved()
-                ->paginate(12),
         ]);
     }
 }
