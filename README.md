@@ -44,4 +44,4 @@ This blog is dedicated to sharing expertise in:
 
 ## Attribution
 
-This project is a fork of [Benjamin Crozat's blog](https://github.com/benjamincrozat/blog), but simplified for my own use.
+This project is a fork of [Benjamin Crozat's blog](https://github.com/benjamincrozat/blog-v5), but simplified for my own use.
