@@ -1,10 +1,9 @@
 <div {{ $attributes->class('bg-gray-100') }}>
     <footer class="container py-8 lg:max-w-(--breakpoint-md) *:[&_a]:underline *:[&_a]:font-medium">
-        <nav class="grid grid-cols-2 gap-y-2 gap-x-6 sm:grid-cols-6 md:grid-cols-7 sm:place-items-center">
+        <nav class="grid grid-cols-2 gap-y-2 gap-x-6 sm:grid-cols-5 md:grid-cols-6 sm:place-items-center">
             <a wire:navigate href="{{ route('home') }}">Home</a>
             <a wire:navigate href="{{ route('blog.posts.index') }}">Articles</a>
             <a wire:navigate href="{{ route('blog.categories.index') }}">Categories</a>
-            <a wire:navigate href="{{ route('links.index') }}">Links</a>
             <a href="{{ route('home') }}#about">About</a>
             <a href="mailto:carlos.santos.dev@gmail.com">Contact</a>
         </nav>

@@ -38,8 +38,6 @@ class GenerateSitemapCommand extends Command
             ->cursor()
             ->each(fn (Category $category) => $sitemap->add(route('categories.show', $category)));
 
-        $sitemap->add(route('links.index'));
-
         $sitemap->writeToFile($path = public_path('sitemap.xml'));
 
         $this->info("Sitemap generated successfully at $path");

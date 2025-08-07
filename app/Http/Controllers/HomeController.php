@@ -12,7 +12,6 @@ class HomeController extends Controller
         // Fetch popular and latest posts separately…
         $popular = Post::query()
             ->published()
-            ->whereDoesntHave('link')
             ->where('sessions_count', '>', 0)
             ->orderBy('sessions_count', 'desc')
             ->limit(12)
@@ -21,7 +20,6 @@ class HomeController extends Controller
         $latest = Post::query()
             ->latest('published_at')
             ->published()
-            ->whereDoesntHave('link')
             ->limit(12)
             ->get();
 

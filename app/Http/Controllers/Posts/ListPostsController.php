@@ -14,7 +14,6 @@ class ListPostsController extends Controller
             'posts' => Post::query()
                 ->latest('published_at')
                 ->published()
-                ->whereDoesntHave('link')
                 ->paginate(24),
         ]);
     }

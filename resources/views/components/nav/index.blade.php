@@ -57,9 +57,7 @@
                     Your comments
                 </x-dropdown.item>
 
-                <x-dropdown.item icon="heroicon-o-link" wire:navigate href="{{ route('user.links') }}">
-                    Your links
-                </x-dropdown.item>
+
 
                 <x-dropdown.item icon="heroicon-o-arrow-right-end-on-rectangle" destructive form="logout-form">
                     Log out
