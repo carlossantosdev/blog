@@ -1,32 +1,47 @@
 <img src="https://github.com/user-attachments/assets/45c65ced-ba72-4de1-a047-7f2aa85f8e4a" width="100" />
 
-# Benjamin Crozat's blog
+# Carlos Santos' Blog
 
-This is the source code for my revenue-generating 20K monthly visitors [blog](https://carlossantosdev.com). It's **100% not vibe coded** BTW.
+This is the source code for my technical blog at [carlossantosdev.com](https://carlossantosdev.com). Here I share insights about software development, technology trends, and document my journey as a developer.
 
-**Feel free to steal whatever you need.** But first, why don't you follow me on [X](https://x.com/carlossantosdev)?
+**Feel free to explore and learn from the code.** Don't forget to follow me on [X](https://x.com/carlossantosdev)!
 
-## What to expect
+## What this blog focuses on
 
-- **Independently built and maintained:**  
-  This codebase evolves organically as time allows and needs arise.
-  
+This blog is dedicated to:
+
+- **Technical posts:** Deep dives into software development, programming languages, frameworks, and best practices
+- **Workshop documentation:** Content and resources from workshops I conduct
+- **Meetup insights:** Sharing knowledge from tech meetups and community events
+- **Development journey:** My experiences and learnings as a software developer
+
+## What to expect from the codebase
+
 - **Production-ready Laravel code:**  
-  Explore clean, fast, and scalable code with Actions, Jobs, Policies, and more, as well as a thoughtfully organized structure.
+  Explore clean, fast, and scalable code with Actions, Jobs, Policies, and more, with a thoughtfully organized structure.
 
-- **Monetization & analytics:**  
-  See how I implemented affiliate links, ad-blocker-resistant analytics, and outbound tracking for real revenue.
+- **Monetization through affiliate links:**  
+  See how affiliate links are implemented for revenue generation.
 
-- **Beautiful admin (WIP) & user experience:**  
-  Discover how Filament v4 powers my admin panel and how Livewire brings interactivity to my custom-made comments system and forms.
+- **Modern admin interface:**  
+  Powered by Filament v4 for content management and administration.
 
-- **Automation & background jobs:**  
-  See how I automate content, recommendations, and more using AI, queues (managed by Horizon), and scheduled tasks.
+- **Interactive features:**  
+  Livewire-powered components for enhanced user experience.
 
-- **Cloudflare Images integration:**  
-  Because I didn't want to develop my own image upload flow from scratch.
+- **Automated workflows:**  
+  Background jobs and scheduled tasks for content automation.
 
-- **Comprehensive test suite:**  
-  130+ tests written using Pest show how to keep features reliable and code maintainable.
+- **Image management:**  
+  Cloudflare Images integration for efficient image handling.
+
+- **Comprehensive testing:**  
+  Test suite written using Pest to ensure code reliability and maintainability.
 
 <img src="https://github.com/user-attachments/assets/75f8d85f-4e86-4674-b8cd-8c8c085b00a1" />
+
+---
+
+## Attribution
+
+This project is a fork of [Benjamin Crozat's blog](https://github.com/benjamincrozat/blog), but simplified to focus on my personal technical content and community activities.
