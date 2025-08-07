@@ -1,19 +1,21 @@
-<img src="https://github.com/user-attachments/assets/45c65ced-ba72-4de1-a047-7f2aa85f8e4a" width="100" />
+<img src="_docs/images/wolf_bg.png" width="100%" />
 
 # Carlos Santos' Blog
 
-This is the source code for my technical blog at [carlossantosdev.com](https://carlossantosdev.com). Here I share insights about software development, technology trends, and document my journey as a developer.
+This is the source code for my technical blog at [carlossantosdev.com](https://carlossantosdev.com). Here I share deep insights about **PHP**, **Laravel Ecosystem**, **AI**, and **Software Architecture**, documenting my journey and experiences as a developer.
 
 **Feel free to explore and learn from the code.** Don't forget to follow me on [X](https://x.com/carlossantosdev)!
 
 ## What this blog focuses on
 
-This blog is dedicated to:
+This blog is dedicated to sharing expertise in:
 
-- **Technical posts:** Deep dives into software development, programming languages, frameworks, and best practices
-- **Workshop documentation:** Content and resources from workshops I conduct
+- **PHP & Laravel Ecosystem:** Deep dives into modern PHP development, Laravel framework features, packages, and best practices
+- **AI Integration:** Exploring how to integrate AI technologies into web applications and development workflows
+- **Software Architecture:** Patterns, principles, and strategies for building scalable and maintainable applications
+- **Workshop documentation:** Content and resources from workshops I conduct on PHP, Laravel, and AI topics
 - **Meetup insights:** Sharing knowledge from tech meetups and community events
-- **Development journey:** My experiences and learnings as a software developer
+- **Development journey:** My experiences and learnings as a PHP developer specializing in Laravel and AI
 
 ## What to expect from the codebase
 
@@ -38,10 +40,8 @@ This blog is dedicated to:
 - **Comprehensive testing:**  
   Test suite written using Pest to ensure code reliability and maintainability.
 
-<img src="https://github.com/user-attachments/assets/75f8d85f-4e86-4674-b8cd-8c8c085b00a1" />
-
 ---
 
 ## Attribution
 
-This project is a fork of [Benjamin Crozat's blog](https://github.com/benjamincrozat/blog), but simplified to focus on my personal technical content and community activities.
+This project is a fork of [Benjamin Crozat's blog](https://github.com/benjamincrozat/blog), but simplified for my own use.
