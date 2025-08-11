@@ -11,6 +11,10 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         Category::factory(30)->create();
     }
 }

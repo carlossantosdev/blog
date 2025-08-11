@@ -11,6 +11,10 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         User::factory()->create([
             'name' => 'Carlos Santos',
             'email' => 'carlos.santos.dev@gmail.com',

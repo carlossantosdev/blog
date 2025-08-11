@@ -13,6 +13,10 @@ class CommentSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         Comment::factory(100)
             ->recycle(User::all())
             ->recycle(Post::query()->where('is_commercial', false)->get())

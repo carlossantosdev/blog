@@ -11,6 +11,10 @@ class ShortUrlSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         ShortUrl::factory(10)->create();
     }
 }

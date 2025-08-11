@@ -14,6 +14,10 @@ class PostSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         Post::factory(50)
             ->recycle(User::all())
             ->recycle(Category::all())

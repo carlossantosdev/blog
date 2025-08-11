@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        if (app()->isProduction()) {
+            return;
+        }
+
         Storage::disk('public')->deleteDirectory('images/posts');
 
         cache()->flush();
