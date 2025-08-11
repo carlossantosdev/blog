@@ -24,6 +24,8 @@
                 {!! Str::markdown($author->about) !!}
             </x-prose>
         @endif
+
+        <x-social-network class="mt-6" />
     </article>
 
     <x-section title="Articles by {{ $author->name }}" class="mt-12 md:mt-16">
