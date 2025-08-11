@@ -3,14 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Metric;
-use Livewire\Livewire;
 use Carbon\CarbonImmutable;
 use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\View;
-use App\Livewire\LinkWizard\FirstStep;
-use App\Livewire\LinkWizard\LinkWizard;
-use App\Livewire\LinkWizard\SecondStep;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
@@ -28,10 +24,6 @@ class AppServiceProvider extends ServiceProvider
     {
         // Not necessary, but why not?
         Date::use(CarbonImmutable::class);
-
-        Livewire::component('link-wizard', LinkWizard::class);
-        Livewire::component('first-step', FirstStep::class);
-        Livewire::component('second-step', SecondStep::class);
 
         Model::automaticallyEagerLoadRelationships();
 
