@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up() : void
     {
-        Schema::create('category_post', function (Blueprint $table) {
+        Schema::create('category_post', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('category_id')->index();
             $table->foreignId('post_id')->index();

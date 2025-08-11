@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
-    protected static ?string $password;
+    protected static ?string $password = null;
 
     public function definition() : array
     {

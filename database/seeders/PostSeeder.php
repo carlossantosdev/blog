@@ -127,7 +127,7 @@ fetchData('https://api.example.com/data').then(data => {
 
 MARKDOWN
             ])
-            ->each(function (Post $post) {
+            ->each(function (Post $post): void {
                 FetchImageForPost::dispatch($post);
 
                 $post->categories()->attach(

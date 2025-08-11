@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
         // this trick removes a lot of friction.
         Model::unguard();
 
-        Storage::extend('cloudflare-images', function ($app, array $config) {
+        Storage::extend('cloudflare-images', function ($app, array $config): \Illuminate\Filesystem\FilesystemAdapter {
             $adapter = new CloudflareImagesAdapter(
                 config('services.cloudflare_images.token'),
                 config('services.cloudflare_images.account_id'),

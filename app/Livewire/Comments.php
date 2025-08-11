@@ -56,7 +56,7 @@ class Comments extends Component
         ]);
 
         // If this is a reply, we notify the parent comment's author.
-        if ($parentId) {
+        if ($parentId !== null && $parentId !== 0) {
             Comment::query()
                 ->find($parentId)
                 ?->user

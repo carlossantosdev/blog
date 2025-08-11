@@ -27,6 +27,7 @@ class User extends Authenticatable implements FilamentUser
         'remember_token',
     ];
 
+    #[\Override]
     protected static function booted() : void
     {
         static::creating(

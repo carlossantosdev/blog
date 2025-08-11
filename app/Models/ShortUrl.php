@@ -11,6 +11,7 @@ class ShortUrl extends Model
 {
     use HasFactory;
 
+    #[\Override]
     protected static function booted() : void
     {
         static::creating(function (self $model) : void {
@@ -21,7 +22,7 @@ class ShortUrl extends Model
     public function link() : Attribute
     {
         return Attribute::make(
-            fn () => 'https://' . config('app.url_shortener_domain') . '/' . $this->code,
+            fn (): string => 'https://' . config('app.url_shortener_domain') . '/' . $this->code,
         );
     }
 }

@@ -20,7 +20,7 @@ class EditUser extends EditRecord
                 ->icon('heroicon-o-user')
                 ->outlined()
                 ->color('gray')
-                ->visible(fn () => Auth::user()?->canImpersonate() && $this->record->canBeImpersonated())
+                ->visible(fn (): bool => Auth::user()?->canImpersonate() && $this->record->canBeImpersonated())
                 ->action(function () {
                     session([
                         'impersonate.return' => request()->headers->get('referer') ?? request()->fullUrl(),

@@ -32,6 +32,7 @@ class MetricResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'key';
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -52,6 +53,7 @@ class MetricResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table

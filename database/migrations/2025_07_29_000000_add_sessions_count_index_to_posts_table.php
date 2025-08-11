@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up() : void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->index('sessions_count');
         });
     }
 
     public function down() : void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->dropIndex(['sessions_count']);
         });
     }

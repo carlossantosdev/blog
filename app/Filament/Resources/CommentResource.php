@@ -31,6 +31,7 @@ class CommentResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -74,6 +75,7 @@ class CommentResource extends Resource
             ->columns(12);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table
@@ -123,6 +125,7 @@ class CommentResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function getRelations() : array
     {
         return [

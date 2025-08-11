@@ -26,15 +26,16 @@ class Post extends Model implements Feedable
 
     protected $withCount = ['comments'];
 
+    #[\Override]
     public static function booted() : void
     {
         static::creating(
-            function (Post $post) {
+            function (Post $post): void {
                 $post->slug ??= Str::slug($post->title);
             }
         );
 
-        static::updating(function (Post $post) {
+        static::updating(function (Post $post): void {
             if (! $post->isDirty('slug')) {
                 return;
             }
@@ -47,7 +48,7 @@ class Post extends Model implements Feedable
                 return;
             }
 
-            DB::transaction(function () use ($old, $new) {
+            DB::transaction(function () use ($old, $new): void {
                 // 1. Remove any redirect originating from the new slug. It would
                 // create a loop once the slug becomes its own destination.
                 Redirect::query()->where('from', $new)->delete();
@@ -104,7 +105,7 @@ class Post extends Model implements Feedable
     public function formattedContent() : Attribute
     {
         return Attribute::make(
-            fn () => Str::markdown($this->content),
+            fn (): string => Str::markdown($this->content),
         )->shouldCache();
     }
 
@@ -118,7 +119,7 @@ class Post extends Model implements Feedable
     public function readTime() : Attribute
     {
         return Attribute::make(
-            fn () => ceil(str_word_count($this->content) / 200),
+            fn (): float => ceil(str_word_count($this->content) / 200),
         )->shouldCache();
     }
 
@@ -128,7 +129,7 @@ class Post extends Model implements Feedable
             fn () => empty($this->recommendations) ? null : Post::query()
                 ->whereIn('id', $this->recommendations->pluck('id'))
                 ->get()
-                ->map(function (self $post) {
+                ->map(function (self $post): \App\Models\Post {
                     $recommendation = collect($this->recommendations)
                         ->firstWhere('id', $post->id);
 
@@ -164,7 +165,7 @@ class Post extends Model implements Feedable
 
         // Build the YAML-like front matter block.
         $frontMatterLines = collect($frontMatter)
-            ->map(fn ($value, string $key) => "$key: $value")
+            ->map(fn ($value, string $key): string => "$key: $value")
             ->implode("\n");
 
         return "---\n{$frontMatterLines}\n---\n\n# {$this->title}\n\n{$this->content}\n";
@@ -210,6 +211,7 @@ MARKDOWN ?? ''))
             ->authorName($this->user->name);
     }
 
+    #[\Override]
     public function getRouteKeyName() : string
     {
         return 'slug';

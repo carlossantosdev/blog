@@ -30,24 +30,24 @@ class EditPost extends EditRecord
                 Action::make('copy_url')
                     ->label('Copy URL')
                     ->icon('heroicon-o-link')
-                    ->alpineClickHandler(fn (Post $record) => 'window.navigator.clipboard.writeText(' . Js::from(route('posts.show', $record)) . ')'),
+                    ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from(route('posts.show', $record)) . ')'),
 
                 Action::make('copy')
                     ->label('Copy as Markdown')
                     ->icon('heroicon-o-clipboard-document')
-                    ->alpineClickHandler(fn (Post $record) => 'window.navigator.clipboard.writeText(' . Js::from($record->toMarkdown()) . ')'),
+                    ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from($record->toMarkdown()) . ')'),
 
                 Action::make('search_console')
                     ->label('Check in GSC')
                     ->icon('heroicon-o-chart-bar')
-                    ->url(function (Post $record) {
-                        $domain = preg_replace('/https?:\/\//', '', config('app.url'));
+                    ->url(function (Post $record): string {
+                        $domain = preg_replace('/https?:\/\//', '', (string) config('app.url'));
 
                         return "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3A$domain&breakdown=query&page=!" . rawurlencode(route('posts.show', $record));
                     }, shouldOpenInNewTab: true),
 
                 Action::make('recommendations')
-                    ->action(function (Post $record) {
+                    ->action(function (Post $record): void {
                         RecommendPosts::dispatch($record);
 
                         Notification::make()

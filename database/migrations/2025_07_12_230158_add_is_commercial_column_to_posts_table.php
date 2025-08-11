@@ -8,14 +8,14 @@ return new class extends Migration
 {
     public function up() : void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->boolean('is_commercial')->default(false)->after('description');
         });
     }
 
     public function down() : void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->dropColumn('is_commercial');
         });
     }

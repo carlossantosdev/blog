@@ -31,7 +31,7 @@ class FetchImageForPost implements ShouldQueue
 
         $this->post->update([
             'image_path' => $path,
-            'image_disk' => $path ? config('filesystems.default') : null,
+            'image_disk' => $path !== null && $path !== '' && $path !== '0' ? config('filesystems.default') : null,
         ]);
     }
 }

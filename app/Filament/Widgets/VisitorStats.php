@@ -13,6 +13,7 @@ class VisitorStats extends StatsOverviewWidget
 
     protected ?string $description = 'Historical analytics data (no longer updating).';
 
+    #[\Override]
     protected function getStats() : array
     {
         $visitors = Number::format(

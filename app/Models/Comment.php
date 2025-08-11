@@ -52,14 +52,14 @@ class Comment extends Model
     public function stripped() : Attribute
     {
         return Attribute::make(
-            fn () => strip_tags(Str::lightdown($this->content)),
+            fn (): string => strip_tags(Str::lightdown($this->content)),
         )->shouldCache();
     }
 
     public function truncated() : Attribute
     {
         return Attribute::make(
-            function () {
+            function (): string {
                 $stripped = strip_tags(Str::lightdown($this->content));
 
                 return trim(
@@ -74,7 +74,7 @@ class Comment extends Model
     public function deleteWithChildren() : self
     {
         $this->children->each(
-            fn (Comment $comment) => $comment->deleteWithChildren()
+            fn (Comment $comment): \App\Models\Comment => $comment->deleteWithChildren()
         );
 
         $this->delete();

@@ -59,6 +59,7 @@ class PostResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -68,7 +69,7 @@ class PostResource extends Resource
                         ->required()
                         ->maxLength(255)
                         ->live(onBlur: true)
-                        ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
+                        ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state): void {
                             // Only update slug if it hasn't been manually customized.
                             if (($get('slug') ?? '') !== Str::slug($old)) {
                                 return;
@@ -146,7 +147,7 @@ class PostResource extends Resource
                         ->placeholder(now())
                         ->defaultFocusedDate(now())
                         ->reactive()
-                        ->afterStateUpdated(function (DateTimePicker $component, $state) {
+                        ->afterStateUpdated(function (DateTimePicker $component, $state): void {
                             if (blank($state)) {
                                 return;
                             }
@@ -167,7 +168,7 @@ class PostResource extends Resource
                         ->defaultFocusedDate(now())
                         ->closeOnDateSelection()
                         ->reactive()
-                        ->afterStateUpdated(function (DateTimePicker $component, $state) {
+                        ->afterStateUpdated(function (DateTimePicker $component, $state): void {
                             if (blank($state)) {
                                 return;
                             }
@@ -188,6 +189,7 @@ class PostResource extends Resource
             ->columns(12);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table
@@ -242,9 +244,9 @@ class PostResource extends Resource
                     ->trueLabel('With image')
                     ->falseLabel('Without image')
                     ->queries(
-                        blank: fn (Builder $query) => $query,
                         true: fn (Builder $query) => $query->whereNotNull('image_path'),
                         false: fn (Builder $query) => $query->whereNull('image_path'),
+                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
                     ),
 
                 TernaryFilter::make('published_at')
@@ -254,9 +256,9 @@ class PostResource extends Resource
                     ->trueLabel('Published')
                     ->falseLabel('Draft')
                     ->queries(
-                        blank: fn (Builder $query) => $query,
                         true: fn (Builder $query) => $query->whereNotNull('published_at'),
                         false: fn (Builder $query) => $query->whereNull('published_at'),
+                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
                     ),
 
                 TernaryFilter::make('updated_stale')
@@ -266,8 +268,7 @@ class PostResource extends Resource
                     ->trueLabel('Yes')
                     ->falseLabel('No')
                     ->queries(
-                        blank: fn (Builder $query) => $query,
-                        true: fn (Builder $query) => $query->where(function (Builder $query) {
+                        true: fn (Builder $query) => $query->where(function (Builder $query): void {
                             $oneYearAgo = now()->subYear();
 
                             $query
@@ -278,7 +279,7 @@ class PostResource extends Resource
                                         ->whereDate('published_at', '<=', $oneYearAgo)
                                 );
                         }),
-                        false: fn (Builder $query) => $query->where(function (Builder $query) {
+                        false: fn (Builder $query) => $query->where(function (Builder $query): void {
                             $oneYearAgo = now()->subYear();
 
                             $query->where(
@@ -291,6 +292,7 @@ class PostResource extends Resource
                                     ->whereDate('published_at', '>', $oneYearAgo)
                             );
                         }),
+                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
                     ),
 
                 TrashedFilter::make(),
@@ -305,24 +307,24 @@ class PostResource extends Resource
                     TableAction::make('copy_url')
                         ->label('Copy URL')
                         ->icon('heroicon-o-link')
-                        ->alpineClickHandler(fn (Post $record) => 'window.navigator.clipboard.writeText(' . Js::from(route('posts.show', $record)) . ')'),
+                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from(route('posts.show', $record)) . ')'),
 
                     TableAction::make('copy')
                         ->label('Copy as Markdown')
                         ->icon('heroicon-o-clipboard-document')
-                        ->alpineClickHandler(fn (Post $record) => 'window.navigator.clipboard.writeText(' . Js::from($record->toMarkdown()) . ')'),
+                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from($record->toMarkdown()) . ')'),
 
                     Action::make('search_console')
                         ->label('Check in GSC')
                         ->icon('heroicon-o-chart-bar')
-                        ->url(function (Post $record) {
-                            $domain = preg_replace('/https?:\/\//', '', config('app.url'));
+                        ->url(function (Post $record): string {
+                            $domain = preg_replace('/https?:\/\//', '', (string) config('app.url'));
 
                             return "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3A$domain&breakdown=query&page=!" . rawurlencode(route('posts.show', $record));
                         }, shouldOpenInNewTab: true),
 
                     Action::make('recommendations')
-                        ->action(function (Post $record) {
+                        ->action(function (Post $record): void {
                             RecommendPosts::dispatch($record);
 
                             Notification::make()

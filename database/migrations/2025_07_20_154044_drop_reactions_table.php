@@ -13,7 +13,7 @@ return new class extends Migration
 
     public function down() : void
     {
-        Schema::create('reactions', function (Blueprint $table) {
+        Schema::create('reactions', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('user_id')->index();
             $table->foreignId('comment_id')->index();

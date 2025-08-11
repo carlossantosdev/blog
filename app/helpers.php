@@ -43,11 +43,11 @@ if (! function_exists('extract_headings_from_markdown')) {
                 ];
 
                 // Pop the stack until we find a heading of a lower level.
-                while (! empty($stack) && end($stack)['level'] >= $level) {
+                while ($stack !== [] && end($stack)['level'] >= $level) {
                     array_pop($stack);
                 }
 
-                if (empty($stack)) {
+                if ($stack === []) {
                     // No parent heading found; this is a top-level heading.
                     $headings[] = $node;
 

@@ -26,7 +26,7 @@ class RecommendPosts
                 ],
                 [
                     'role' => 'user',
-                    'content' => view('components.prompts.get-recommended-posts.user', compact('post', 'candidates'))->render(),
+                    'content' => view('components.prompts.get-recommended-posts.user', ['post' => $post, 'candidates' => $candidates])->render(),
                 ],
             ],
             'response_format' => [
@@ -74,7 +74,7 @@ class RecommendPosts
         ]);
 
         $post->update([
-            'recommendations' => json_decode($response->choices[0]->message->content)->recommendations,
+            'recommendations' => json_decode((string) $response->choices[0]->message->content)->recommendations,
         ]);
     }
 }

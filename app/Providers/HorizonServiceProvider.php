@@ -9,6 +9,7 @@ use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider
 {
+    #[\Override]
     public function boot() : void
     {
         parent::boot();
@@ -16,10 +17,9 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         Horizon::routeMailNotificationsTo('carlos.santos.dev@gmail.com');
     }
 
+    #[\Override]
     protected function gate() : void
     {
-        Gate::define('viewHorizon', function (User $user) {
-            return $user->isAdmin();
-        });
+        Gate::define('viewHorizon', fn(User $user): bool => $user->isAdmin());
     }
 }

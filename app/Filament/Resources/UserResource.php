@@ -32,6 +32,7 @@ class UserResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -57,6 +58,7 @@ class UserResource extends Resource
             ->columns(1);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table

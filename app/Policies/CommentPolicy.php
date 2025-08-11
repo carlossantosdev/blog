@@ -7,11 +7,12 @@ use App\Models\Comment;
 
 class CommentPolicy
 {
-    public function before(User $user)
+    public function before(User $user): ?bool
     {
         if ($user->isAdmin()) {
             return true;
         }
+        return null;
     }
 
     public function delete(User $user, Comment $comment) : bool

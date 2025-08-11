@@ -31,6 +31,7 @@ class RedirectResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'from';
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -45,6 +46,7 @@ class RedirectResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table

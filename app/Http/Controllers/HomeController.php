@@ -28,6 +28,6 @@ class HomeController extends Controller
         // would have loaded the relationships twice later in the view.
         $popular->concat($latest)->load('categories', 'user');
 
-        return view('home', compact('popular', 'latest'));
+        return view('home', ['popular' => $popular, 'latest' => $latest]);
     }
 }

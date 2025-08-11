@@ -13,11 +13,9 @@ class ShowMerchantController extends Controller
     {
         abort_if(
             ! $merchantLink = collect(config('merchants'))
-                ->flatMap(function (array $items) {
-                    return collect($items)->map(
-                        fn (mixed $item) => $item['link'] ?? $item
-                    );
-                })
+                ->flatMap(fn(array $items) => collect($items)->map(
+                    fn (mixed $item): mixed => $item['link'] ?? $item
+                ))
                 ->get($slug),
             404
         );

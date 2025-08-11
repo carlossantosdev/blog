@@ -27,7 +27,7 @@ class GenerateRecommendationsCommand extends Command
         Post::query()
             ->published()
             ->cursor()
-            ->each(function (Post $post) {
+            ->each(function (Post $post): void {
                 RecommendPosts::dispatch($post);
 
                 $this->info("Queued recommendation generation for \"$post->title\"…");

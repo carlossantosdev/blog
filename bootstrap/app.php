@@ -17,12 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
         ],
         commands: __DIR__ . '/../routes/console.php',
     )
-    ->withMiddleware(function (Middleware $middleware) {
+    ->withMiddleware(function (Middleware $middleware): void {
         $middleware
             ->redirectGuestsTo('/login')
             ->append(HandleRedirects::class);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         Integration::handles($exceptions);
     })
     ->create();

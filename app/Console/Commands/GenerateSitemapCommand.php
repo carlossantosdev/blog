@@ -17,7 +17,7 @@ class GenerateSitemapCommand extends Command
 {
     public function handle() : void
     {
-        $sitemap = Sitemap::create(config('app.url'));
+        $sitemap = Sitemap::create();
 
         $sitemap->add(route('home'));
 
@@ -26,17 +26,17 @@ class GenerateSitemapCommand extends Command
         Post::query()
             ->published()
             ->cursor()
-            ->each(fn (Post $post) => $sitemap->add(route('posts.show', $post)));
+            ->each(fn (Post $post): \Spatie\Sitemap\Sitemap => $sitemap->add(route('posts.show', $post)));
 
         User::query()
             ->cursor()
-            ->each(fn (User $user) => $sitemap->add(route('authors.show', $user)));
+            ->each(fn (User $user): \Spatie\Sitemap\Sitemap => $sitemap->add(route('authors.show', $user)));
 
         $sitemap->add(route('categories.index'));
 
         Category::query()
             ->cursor()
-            ->each(fn (Category $category) => $sitemap->add(route('categories.show', $category)));
+            ->each(fn (Category $category): \Spatie\Sitemap\Sitemap => $sitemap->add(route('categories.show', $category)));
 
         $sitemap->writeToFile($path = public_path('sitemap.xml'));
 

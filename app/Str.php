@@ -20,6 +20,7 @@ use League\CommonMark\Extension\DefaultAttributes\DefaultAttributesExtension;
 
 class Str extends \Illuminate\Support\Str
 {
+    #[\Override]
     public static function markdown($string, array $options = [], array $extensions = []) : string  // @pest-ignore-type
     {
         $options = array_merge([
@@ -38,7 +39,7 @@ class Str extends \Illuminate\Support\Str
             // Open external links in a new window.
             'external_link' => [
                 'internal_hosts' => [
-                    preg_replace('/https?:\/\//', '', config('app.url')),
+                    preg_replace('/https?:\/\//', '', (string) config('app.url')),
                 ],
                 'open_in_new_window' => true,
             ],
@@ -64,7 +65,7 @@ class Str extends \Illuminate\Support\Str
         return (string) $converter->convert($string);
     }
 
-    public static function lightdown($string, array $options = [], array $extensions = []) : string  // @pest-ignore-type
+    public static function lightdown(string $string, array $options = [], array $extensions = []) : string  // @pest-ignore-type
     {
         $options = array_merge([
             'disallowed_raw_html' => [
@@ -73,7 +74,7 @@ class Str extends \Illuminate\Support\Str
             // Open external links in a new window.
             'external_link' => [
                 'internal_hosts' => [
-                    preg_replace('/https?:\/\//', '', config('app.url')),
+                    preg_replace('/https?:\/\//', '', (string) config('app.url')),
                 ],
                 'open_in_new_window' => true,
             ],
@@ -115,7 +116,7 @@ class Str extends \Illuminate\Support\Str
      */
     protected static function childrenToText(Node $node) : string
     {
-        return implode('', array_map(function (Node $child) {
+        return implode('', array_map(function (Node $child): string {
             if ($child instanceof AbstractStringContainer) {
                 return $child->getLiteral();
             }

@@ -27,11 +27,11 @@ class AdminPanelProvider extends PanelProvider
 {
     public function boot() : void
     {
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker) => $dateTimePicker->defaultDateDisplayFormat('Y/m/d'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateDisplayFormat('Y/m/d'));
 
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker) => $dateTimePicker->defaultDateTimeDisplayFormat('Y/m/d H:i'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateTimeDisplayFormat('Y/m/d H:i'));
 
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker) => $dateTimePicker->defaultDateTimeWithSecondsDisplayFormat('Y/m/d H:i:s'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateTimeWithSecondsDisplayFormat('Y/m/d H:i:s'));
     }
 
     public function panel(Panel $panel) : Panel

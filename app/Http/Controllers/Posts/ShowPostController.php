@@ -35,7 +35,7 @@ class ShowPostController extends Controller
             }
         }
 
-        return view('posts.show', compact('post') + [
+        return view('posts.show', ['post' => $post] + [
             'latestComment' => $post->comments()
                 ->whereRelation('user', 'github_login', '!=', 'carlossantosdev')
                 ->latest()

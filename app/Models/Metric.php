@@ -12,11 +12,12 @@ class Metric extends Model
     /** @use HasFactory<MetricFactory> */
     use HasFactory;
 
+    #[\Override]
     protected static function booted() : void
     {
         // We should always return the latest metric. I'm not a
         // fan of global scopes, but this one is appropriate.
-        static::addGlobalScope('latest', function (Builder $builder) {
+        static::addGlobalScope('latest', function (Builder $builder): void {
             $builder->latest();
         });
     }

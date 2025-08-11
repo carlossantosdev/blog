@@ -33,6 +33,7 @@ class CategoryResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[\Override]
     public static function form(Schema $schema) : Schema
     {
         return $schema
@@ -41,7 +42,7 @@ class CategoryResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('slug', Str::slug($state))),
+                    ->afterStateUpdated(fn (Set $set, ?string $state): mixed => $set('slug', Str::slug($state))),
 
                 TextInput::make('slug')
                     ->required()
@@ -52,6 +53,7 @@ class CategoryResource extends Resource
             ]);
     }
 
+    #[\Override]
     public static function table(Table $table) : Table
     {
         return $table
@@ -97,6 +99,7 @@ class CategoryResource extends Resource
         ];
     }
 
+    #[\Override]
     public static function getRelations() : array
     {
         return [
@@ -109,6 +112,7 @@ class CategoryResource extends Resource
         return ['name', 'slug', 'content'];
     }
 
+    #[\Override]
     public static function getEloquentQuery() : Builder
     {
         return parent::getEloquentQuery()

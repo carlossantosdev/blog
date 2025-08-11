@@ -27,16 +27,19 @@ class ManagePostComments extends ManageRelatedRecords
         return CommentResource::table($table);
     }
 
+    #[\Override]
     public function getTitle() : string|Htmlable
     {
         return "Manage \"{$this->getRecordTitle()}\" comments";
     }
 
+    #[\Override]
     public function getBreadcrumb() : string
     {
         return 'Manage Comments';
     }
 
+    #[\Override]
     public static function getNavigationLabel() : string
     {
         return 'Manage Comments';
