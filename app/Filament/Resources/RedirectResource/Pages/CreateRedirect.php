@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\RedirectResource\Pages;
 
+use App\Filament\Resources\RedirectResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
-use App\Filament\Resources\RedirectResource;
 
 class CreateRedirect extends CreateRecord
 {
     protected static string $resource = RedirectResource::class;
 
-    protected function getHeaderActions() : array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('copy')

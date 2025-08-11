@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
+use App\Filesystem\CloudflareImagesAdapter;
 use App\Models\Metric;
 use Carbon\CarbonImmutable;
-use League\Flysystem\Filesystem;
-use Illuminate\Support\Facades\Date;
-use Illuminate\Support\Facades\View;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\ServiceProvider;
-use App\Filesystem\CloudflareImagesAdapter;
 use Illuminate\Filesystem\FilesystemAdapter;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
+use League\Flysystem\Filesystem;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     protected ?int $visitors = null;
 
-    public function boot() : void
+    public function boot(): void
     {
         // Not necessary, but why not?
         Date::use(CarbonImmutable::class);
@@ -35,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         // this trick removes a lot of friction.
         Model::unguard();
 
-        Storage::extend('cloudflare-images', function ($app, array $config): \Illuminate\Filesystem\FilesystemAdapter {
+        Storage::extend('cloudflare-images', function ($app, array $config): FilesystemAdapter {
             $adapter = new CloudflareImagesAdapter(
                 config('services.cloudflare_images.token'),
                 config('services.cloudflare_images.account_id'),

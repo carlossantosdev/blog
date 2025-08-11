@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 it('extracts headings from markdown', function () {
     $markdown = <<<'MARKDOWN'
 # Foo

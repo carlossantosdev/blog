@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Factories;
 
 use App\Models\ShortUrl;
@@ -12,7 +14,7 @@ class ShortUrlFactory extends Factory
 {
     protected $model = ShortUrl::class;
 
-    public function definition() : array
+    public function definition(): array
     {
         return [
             'url' => fake()->url(),

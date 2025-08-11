@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use App\Models\Post;
-use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 
 class RecommendPosts implements ShouldQueue
 {
@@ -14,7 +16,7 @@ class RecommendPosts implements ShouldQueue
         public Post $post,
     ) {}
 
-    public function handle() : void
+    public function handle(): void
     {
         app(\App\Actions\RecommendPosts::class)->recommend($this->post);
     }

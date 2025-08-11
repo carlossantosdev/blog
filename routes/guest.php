@@ -1,14 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+declare(strict_types=1);
+
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\Posts\ShowPostController;
-use App\Http\Controllers\Posts\ListPostsController;
 use App\Http\Controllers\Authors\ShowAuthorController;
-use App\Http\Controllers\Merchants\ShowMerchantController;
-use App\Http\Controllers\Categories\ShowCategoryController;
 use App\Http\Controllers\Categories\ListCategoriesController;
+use App\Http\Controllers\Categories\ShowCategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Merchants\ShowMerchantController;
+use App\Http\Controllers\Posts\ListPostsController;
+use App\Http\Controllers\Posts\ShowPostController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)
     ->name('home');

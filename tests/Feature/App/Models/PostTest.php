@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Post;
-use App\Models\User;
 use App\Models\Redirect;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
-use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
 
 it('generates a slug when a post is created if none is provided', function () {
@@ -308,7 +310,7 @@ it('converts a post to a valid FeedItem via toFeedItem()', function () {
 
     $feedItem = $post->toFeedItem();
 
-    expect($feedItem)->toBeInstanceOf(\Spatie\Feed\FeedItem::class)
+    expect($feedItem)->toBeInstanceOf(Spatie\Feed\FeedItem::class)
         ->and($feedItem->id)->toBe('foo')
         ->and($feedItem->title)->toBe('Foo')
         ->and($feedItem->link)->toBe(route('posts.show', $post))

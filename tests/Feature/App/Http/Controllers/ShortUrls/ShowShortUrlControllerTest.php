@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\ShortUrl;
+use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\get;
-
-use Illuminate\Support\Facades\Http;
 
 beforeEach(fn () => Http::allowStrayRequests());
 

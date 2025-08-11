@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Collection;
 
 use function Pest\Laravel\get;
-
-use Illuminate\Support\Collection;
 
 it("renders with popular and latest posts and the creator's about section", function () {
     Post::factory(15)->create(['sessions_count' => 0]);
@@ -19,9 +20,9 @@ it("renders with popular and latest posts and the creator's about section", func
     get(route('home'))
         ->assertOk()
         ->assertViewIs('home')
-        ->assertViewHas('popular', fn (Collection $popular) => 12 === $popular->count())
-        ->assertViewHas('latest', fn (Collection $latest) => 12 === $latest->count())
-        ->assertViewHas('aboutUser', fn (User $aboutUser) => 'carlossantosdev' === $aboutUser->github_login);
+        ->assertViewHas('popular', fn (Collection $popular) => $popular->count() === 12)
+        ->assertViewHas('latest', fn (Collection $latest) => $latest->count() === 12)
+        ->assertViewHas('aboutUser', fn (User $aboutUser) => $aboutUser->github_login === 'carlossantosdev');
 });
 
 it('does not show popular posts if there are no sessions', function () {

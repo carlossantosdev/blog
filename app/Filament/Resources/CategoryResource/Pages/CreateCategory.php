@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\CategoryResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\CategoryResource;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateCategory extends CreateRecord
 {

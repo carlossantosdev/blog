@@ -1,18 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Livewire\Comments;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Comment;
-use App\Livewire\Comments;
-use App\Notifications\NewReply;
 use App\Notifications\NewComment;
+use App\Notifications\NewReply;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Notification;
 
 use function Pest\Laravel\actingAs;
-use function Pest\Livewire\livewire;
 use function Pest\Laravel\assertDatabaseHas;
-
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Pagination\LengthAwarePaginator;
+use function Pest\Livewire\livewire;
 
 it('allows users to comment on a post and notifies the admin', function () {
     Notification::fake();

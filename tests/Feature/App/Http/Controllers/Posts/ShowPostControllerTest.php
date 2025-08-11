@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Post;
 use App\Models\User;
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
 it('shows a post', function () {
     $post = Post::factory()->hasComments(3)->create();

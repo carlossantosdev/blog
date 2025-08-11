@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Actions\RefreshUserData;
 use App\Models\User;
 use Facades\Github\Client;
-use App\Actions\RefreshUserData;
 use Illuminate\Support\Facades\Date;
 
 it('fetches GitHub user data and updates the user model', function () {

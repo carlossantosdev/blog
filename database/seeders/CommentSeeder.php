@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Database\Seeder;
 
 class CommentSeeder extends Seeder
 {
-    public function run() : void
+    public function run(): void
     {
         Comment::factory(100)
             ->recycle(User::all())

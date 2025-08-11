@@ -1,13 +1,14 @@
 <?php
 
-use App\Models\User;
+declare(strict_types=1);
+
+use App\Console\Commands\RefreshUserDataCommand;
 use App\Jobs\RefreshUserData;
-
-use function Pest\Laravel\artisan;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Date;
-use App\Console\Commands\RefreshUserDataCommand;
+
+use function Pest\Laravel\artisan;
 
 it('queues a refresh job for a specific user when an id is provided', function () {
     Bus::fake();

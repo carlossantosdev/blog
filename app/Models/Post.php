@@ -1,23 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Str;
-use Spatie\Feed\Feedable;
-use Spatie\Feed\FeedItem;
+use Database\Factories\PostFactory;
+use Illuminate\Database\Eloquent\Attributes\Scope;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use Database\Factories\PostFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Attributes\Scope;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Override;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
 class Post extends Model implements Feedable
 {
@@ -26,8 +29,8 @@ class Post extends Model implements Feedable
 
     protected $withCount = ['comments'];
 
-    #[\Override]
-    public static function booted() : void
+    #[Override]
+    public static function booted(): void
     {
         static::creating(
             function (Post $post): void {
@@ -66,70 +69,58 @@ class Post extends Model implements Feedable
         });
     }
 
-    protected function casts() : array
+    public static function getFeedItems(): Collection
     {
-        return [
-            'published_at' => 'datetime',
-            'modified_at' => 'datetime',
-            'recommendations' => 'collection',
-        ];
+        return static::query()
+            ->published()
+            ->latest('published_at')
+            ->limit(50)
+            ->get();
     }
 
-    #[Scope]
-    protected function published(Builder $query) : void
-    {
-        $query->whereNotNull('published_at');
-    }
-
-    #[Scope]
-    protected function unpublished(Builder $query) : void
-    {
-        $query->whereNull('published_at');
-    }
-
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function categories() : BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function comments() : HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
     }
 
-    public function formattedContent() : Attribute
+    public function formattedContent(): Attribute
     {
         return Attribute::make(
             fn (): string => Str::markdown($this->content),
         )->shouldCache();
     }
 
-    public function imageUrl() : Attribute
+    public function imageUrl(): Attribute
     {
         return Attribute::make(
             fn () => $this->hasImage() ? Storage::disk($this->image_disk)->url($this->image_path) : null,
         )->shouldCache();
     }
 
-    public function readTime() : Attribute
+    public function readTime(): Attribute
     {
         return Attribute::make(
             fn (): float => ceil(str_word_count($this->content) / 200),
         )->shouldCache();
     }
 
-    public function recommendedPosts() : Attribute
+    public function recommendedPosts(): Attribute
     {
         return Attribute::make(
             fn () => empty($this->recommendations) ? null : Post::query()
                 ->whereIn('id', $this->recommendations->pluck('id'))
                 ->get()
-                ->map(function (self $post): \App\Models\Post {
+                ->map(function (self $post): Post {
                     $recommendation = collect($this->recommendations)
                         ->firstWhere('id', $post->id);
 
@@ -142,12 +133,12 @@ class Post extends Model implements Feedable
         )->shouldCache();
     }
 
-    public function hasImage() : bool
+    public function hasImage(): bool
     {
         return $this->image_path && $this->image_disk;
     }
 
-    public function toMarkdown() : string
+    public function toMarkdown(): string
     {
         // Ensure categories are loaded so we can list them in the front matter.
         $this->loadMissing('categories');
@@ -171,7 +162,7 @@ class Post extends Model implements Feedable
         return "---\n{$frontMatterLines}\n---\n\n# {$this->title}\n\n{$this->content}\n";
     }
 
-    public function toPrompt() : string
+    public function toPrompt(): string
     {
         $content = preg_replace(['/\s+/', '/\n+/'], [' ', "\n"], strip_tags($this->formatted_content, allowed_tags: ['a']));
 
@@ -184,23 +175,14 @@ Highlight the key points of this article.
 MARKDOWN;
     }
 
-    public static function getFeedItems() : Collection
-    {
-        return static::query()
-            ->published()
-            ->latest('published_at')
-            ->limit(50)
-            ->get();
-    }
-
-    public function toFeedItem() : FeedItem
+    public function toFeedItem(): FeedItem
     {
         $link = route('posts.show', $this);
 
         return FeedItem::create()
             ->id($this->slug)
             ->title($this->title)
-            ->summary(Str::markdown($this->description . <<<MARKDOWN
+            ->summary(Str::markdown($this->description.<<<MARKDOWN
 
 [Read more →]($link)
 
@@ -211,9 +193,30 @@ MARKDOWN ?? ''))
             ->authorName($this->user->name);
     }
 
-    #[\Override]
-    public function getRouteKeyName() : string
+    #[Override]
+    public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'published_at' => 'datetime',
+            'modified_at' => 'datetime',
+            'recommendations' => 'collection',
+        ];
+    }
+
+    #[Scope]
+    protected function published(Builder $query): void
+    {
+        $query->whereNotNull('published_at');
+    }
+
+    #[Scope]
+    protected function unpublished(Builder $query): void
+    {
+        $query->whereNull('published_at');
     }
 }

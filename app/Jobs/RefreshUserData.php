@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 use App\Models\User;
-use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 
 class RefreshUserData implements ShouldQueue
 {
@@ -14,7 +16,7 @@ class RefreshUserData implements ShouldQueue
         public User $user,
     ) {}
 
-    public function handle() : void
+    public function handle(): void
     {
         app(\App\Actions\RefreshUserData::class)->refresh($this->user);
     }

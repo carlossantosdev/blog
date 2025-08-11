@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'feeds' => [
         'main' => [
@@ -18,8 +20,8 @@ return [
              */
             'url' => '/feed',
 
-            'title' => config('app.name') . ' posts',
-            'description' => 'Latest articles from ' . config('app.name'),
+            'title' => config('app.name').' posts',
+            'description' => 'Latest articles from '.config('app.name'),
             'language' => 'en-US',
 
             /*

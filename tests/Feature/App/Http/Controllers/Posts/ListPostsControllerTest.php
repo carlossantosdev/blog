@@ -1,8 +1,10 @@
 <?php
 
-use function Pest\Laravel\get;
+declare(strict_types=1);
 
 use Illuminate\Pagination\LengthAwarePaginator;
+
+use function Pest\Laravel\get;
 
 it('lists posts', function () {
     get(route('posts.index'))

@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\User;
+declare(strict_types=1);
+
 use App\Livewire\CommentForm;
+use App\Models\User;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Livewire\livewire;

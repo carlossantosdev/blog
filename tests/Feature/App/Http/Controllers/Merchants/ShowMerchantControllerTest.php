@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use function Pest\Laravel\get;
 
 it('redirects to the merchant with the same query parameters', function () {
     get(route('merchants.show', ['ploi', 'foo' => 'bar']))
-        ->assertRedirectContains(config('merchants.services.ploi') . '&foo=bar');
+        ->assertRedirectContains(config('merchants.services.ploi').'&foo=bar');
 });
 
 test('it throws 404 when merchant does not exist', function () {

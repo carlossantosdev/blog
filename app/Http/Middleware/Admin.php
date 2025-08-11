@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Closure;
@@ -9,9 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 class Admin
 {
     /**
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next) : Response
+    public function handle(Request $request, Closure $next): Response
     {
         if ($request->user()?->isAdmin()) {
             return $next($request);

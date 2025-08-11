@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Actions\FetchPostSessions;
+use Illuminate\Console\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(
@@ -12,7 +14,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 )]
 class SyncPostSessionsCommand extends Command
 {
-    public function handle() : void
+    public function handle(): void
     {
         app(FetchPostSessions::class)->fetch();
 

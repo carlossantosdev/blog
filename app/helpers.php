@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Str;
 
 if (! function_exists('extract_headings_from_markdown')) {
@@ -19,7 +21,7 @@ if (! function_exists('extract_headings_from_markdown')) {
      *     }>
      * }>
      */
-    function extract_headings_from_markdown(string $markdown) : array
+    function extract_headings_from_markdown(string $markdown): array
     {
         // Split the markdown into lines (supports various newline types).
         $lines = preg_split('/\R/', $markdown);
@@ -31,9 +33,9 @@ if (! function_exists('extract_headings_from_markdown')) {
         foreach ($lines as $line) {
             // Look for markdown headings (one or more '#' followed by a space and then text).
             if (preg_match('/^(#+)\s+(.*)$/', $line, $matches)) {
-                $level = strlen($matches[1]);  // The heading level is determined by the number of '#' characters
+                $level = mb_strlen($matches[1]);  // The heading level is determined by the number of '#' characters
 
-                $text = trim(strip_tags(Str::markdown($matches[2])));
+                $text = mb_trim(strip_tags(Str::markdown($matches[2])));
 
                 $node = [
                     'level' => $level,

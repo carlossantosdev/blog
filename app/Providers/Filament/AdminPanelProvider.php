@@ -1,40 +1,42 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers\Filament;
 
-use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Pages\Dashboard;
-use Filament\Navigation\MenuItem;
-use Filament\Support\Colors\Color;
-use Filament\Widgets\AccountWidget;
 use App\Filament\Widgets\VisitorStats;
-use Filament\Navigation\NavigationItem;
-use Filament\Widgets\FilamentInfoWidget;
-use Filament\Http\Middleware\Authenticate;
 use Filament\Forms\Components\DateTimePicker;
-use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Cookie\Middleware\EncryptCookies;
+use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Filament\Navigation\MenuItem;
+use Filament\Navigation\NavigationItem;
+use Filament\Pages\Dashboard;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\Support\Colors\Color;
+use Filament\Widgets\AccountWidget;
+use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
-    public function boot() : void
+    public function boot(): void
     {
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateDisplayFormat('Y/m/d'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): DateTimePicker => $dateTimePicker->defaultDateDisplayFormat('Y/m/d'));
 
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateTimeDisplayFormat('Y/m/d H:i'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): DateTimePicker => $dateTimePicker->defaultDateTimeDisplayFormat('Y/m/d H:i'));
 
-        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): \Filament\Forms\Components\DateTimePicker => $dateTimePicker->defaultDateTimeWithSecondsDisplayFormat('Y/m/d H:i:s'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $dateTimePicker): DateTimePicker => $dateTimePicker->defaultDateTimeWithSecondsDisplayFormat('Y/m/d H:i:s'));
     }
 
-    public function panel(Panel $panel) : Panel
+    public function panel(Panel $panel): Panel
     {
         return $panel
             ->default()

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 
-use function Pest\Laravel\get;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
 it('leaves impersonation and redirects to users list', function () {
-    /** @var \App\Models\User $admin */
+    /** @var User $admin */
     $admin = User::factory()->create([
         'github_login' => 'benjamincrozat',
     ]);
@@ -28,7 +30,7 @@ it('leaves impersonation and redirects to users list', function () {
 });
 
 it('redirects even when not impersonating', function () {
-    /** @var \App\Models\User $admin */
+    /** @var User $admin */
     $admin = User::factory()->create([
         'github_login' => 'benjamincrozat',
     ]);

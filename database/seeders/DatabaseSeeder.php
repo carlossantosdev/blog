@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -7,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run() : void
+    public function run(): void
     {
         Storage::disk('public')->deleteDirectory('images/posts');
 

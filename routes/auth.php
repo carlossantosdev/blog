@@ -1,10 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LogoutController;
+declare(strict_types=1);
+
 use App\Http\Controllers\Auth\GithubAuthCallbackController;
 use App\Http\Controllers\Auth\GithubAuthRedirectController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Impersonation\LeaveImpersonationController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')
     ->group(function () {

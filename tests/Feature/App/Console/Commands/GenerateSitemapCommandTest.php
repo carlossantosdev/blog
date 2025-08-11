@@ -1,13 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Console\Commands\GenerateSitemapCommand;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Category;
+use Illuminate\Support\Facades\File;
 
 use function Pest\Laravel\artisan;
-
-use Illuminate\Support\Facades\File;
-use App\Console\Commands\GenerateSitemapCommand;
 
 it('generates a sitemap with the most important pages', function () {
     Post::factory(10)->create();

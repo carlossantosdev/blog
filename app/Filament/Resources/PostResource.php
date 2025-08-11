@@ -1,66 +1,71 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Str;
-use App\Models\Post;
-use Filament\Tables\Table;
-use Illuminate\Support\Js;
-use App\Jobs\RecommendPosts;
-use Filament\Actions\Action;
-use Filament\Schemas\Schema;
-use Illuminate\Support\Number;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\ActionGroup;
-use Filament\Actions\DeleteAction;
-use Filament\Resources\Pages\Page;
-use Filament\Actions\RestoreAction;
-use Illuminate\Support\Facades\Date;
-use Filament\Actions\BulkActionGroup;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Schemas\Components\Group;
-use Filament\Actions\ForceDeleteAction;
-use Filament\Actions\RestoreBulkAction;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\FileUpload;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Filters\TernaryFilter;
-use Filament\Tables\Filters\TrashedFilter;
-use Filament\Actions\Action as TableAction;
-use Filament\Actions\ForceDeleteBulkAction;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\MarkdownEditor;
-use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Set;
-use Filament\Pages\Enums\SubNavigationPosition;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\PostResource\Pages\CreatePost;
 use App\Filament\Resources\PostResource\Pages\EditPost;
 use App\Filament\Resources\PostResource\Pages\ListPosts;
-use App\Filament\Resources\PostResource\Pages\CreatePost;
 use App\Filament\Resources\PostResource\Pages\ManagePostComments;
+use App\Jobs\RecommendPosts;
+use App\Models\Post;
+use App\Str;
+use BackedEnum;
+use Filament\Actions\Action;
+use Filament\Actions\Action as TableAction;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Notifications\Notification;
+use Filament\Pages\Enums\SubNavigationPosition;
+use Filament\Resources\Pages\Page;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TernaryFilter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Js;
+use Illuminate\Support\Number;
+use Override;
+use UnitEnum;
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Blog';
+    protected static string|UnitEnum|null $navigationGroup = 'Blog';
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';
 
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    #[\Override]
-    public static function form(Schema $schema) : Schema
+    #[Override]
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -189,8 +194,8 @@ class PostResource extends Resource
             ->columns(12);
     }
 
-    #[\Override]
-    public static function table(Table $table) : Table
+    #[Override]
+    public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
@@ -246,7 +251,7 @@ class PostResource extends Resource
                     ->queries(
                         true: fn (Builder $query) => $query->whereNotNull('image_path'),
                         false: fn (Builder $query) => $query->whereNull('image_path'),
-                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
+                        blank: fn (Builder $query): Builder => $query,
                     ),
 
                 TernaryFilter::make('published_at')
@@ -258,7 +263,7 @@ class PostResource extends Resource
                     ->queries(
                         true: fn (Builder $query) => $query->whereNotNull('published_at'),
                         false: fn (Builder $query) => $query->whereNull('published_at'),
-                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
+                        blank: fn (Builder $query): Builder => $query,
                     ),
 
                 TernaryFilter::make('updated_stale')
@@ -292,7 +297,7 @@ class PostResource extends Resource
                                     ->whereDate('published_at', '>', $oneYearAgo)
                             );
                         }),
-                        blank: fn (Builder $query): \Illuminate\Database\Eloquent\Builder => $query,
+                        blank: fn (Builder $query): Builder => $query,
                     ),
 
                 TrashedFilter::make(),
@@ -307,12 +312,12 @@ class PostResource extends Resource
                     TableAction::make('copy_url')
                         ->label('Copy URL')
                         ->icon('heroicon-o-link')
-                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from(route('posts.show', $record)) . ')'),
+                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText('.Js::from(route('posts.show', $record)).')'),
 
                     TableAction::make('copy')
                         ->label('Copy as Markdown')
                         ->icon('heroicon-o-clipboard-document')
-                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText(' . Js::from($record->toMarkdown()) . ')'),
+                        ->alpineClickHandler(fn (Post $record): string => 'window.navigator.clipboard.writeText('.Js::from($record->toMarkdown()).')'),
 
                     Action::make('search_console')
                         ->label('Check in GSC')
@@ -320,7 +325,7 @@ class PostResource extends Resource
                         ->url(function (Post $record): string {
                             $domain = preg_replace('/https?:\/\//', '', (string) config('app.url'));
 
-                            return "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3A$domain&breakdown=query&page=!" . rawurlencode(route('posts.show', $record));
+                            return "https://search.google.com/search-console/performance/search-analytics?resource_id=sc-domain%3A$domain&breakdown=query&page=!".rawurlencode(route('posts.show', $record));
                         }, shouldOpenInNewTab: true),
 
                     Action::make('recommendations')
@@ -354,7 +359,7 @@ class PostResource extends Resource
             ]);
     }
 
-    public static function getPages() : array
+    public static function getPages(): array
     {
         return [
             'index' => ListPosts::route('/'),
@@ -364,17 +369,17 @@ class PostResource extends Resource
         ];
     }
 
-    public static function getGloballySearchableAttributes() : array
+    public static function getGloballySearchableAttributes(): array
     {
         return ['user.name', 'title', 'serp_title', 'slug', 'content', 'description', 'canonical_url'];
     }
 
-    public static function getGlobalSearchResultDetails(Model $record) : array
+    public static function getGlobalSearchResultDetails(Model $record): array
     {
         return ['Author' => $record->user->name];
     }
 
-    public static function getRecordSubNavigation(Page $page) : array
+    public static function getRecordSubNavigation(Page $page): array
     {
         return $page->generateNavigationItems([
             EditPost::class,
@@ -382,12 +387,12 @@ class PostResource extends Resource
         ]);
     }
 
-    public static function getSubNavigationPosition() : SubNavigationPosition
+    public static function getSubNavigationPosition(): SubNavigationPosition
     {
         return SubNavigationPosition::Top;
     }
 
-    public static function getRecordRouteBindingEloquentQuery() : Builder
+    public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()
             ->withoutGlobalScopes([

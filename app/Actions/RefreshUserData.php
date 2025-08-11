@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
-use Github\Client;
 use App\Models\User;
+use Github\Client;
 
 class RefreshUserData
 {
     /**
      * Refresh the user's data from GitHub.
      */
-    public function refresh(User $user) : void
+    public function refresh(User $user): void
     {
         $data = app(Client::class)
             ->api('user')

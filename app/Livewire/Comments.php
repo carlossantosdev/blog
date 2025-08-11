@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire;
 
-use App\Models\User;
 use App\Models\Comment;
-use Livewire\Component;
-use Illuminate\View\View;
-use Livewire\Attributes\On;
-use Livewire\WithPagination;
-use App\Notifications\NewReply;
-use Livewire\Attributes\Locked;
+use App\Models\User;
 use App\Notifications\NewComment;
+use App\Notifications\NewReply;
+use Illuminate\View\View;
+use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class Comments extends Component
 {
@@ -26,7 +28,7 @@ class Comments extends Component
      */
     public ?int $parentId = null;
 
-    public function render() : View
+    public function render(): View
     {
         return view('livewire.comments', [
             'comments' => Comment::query()
@@ -42,7 +44,7 @@ class Comments extends Component
     }
 
     #[On('comment.submitted')]
-    public function store(?int $parentId = null, string $commentContent = '') : void
+    public function store(?int $parentId = null, string $commentContent = ''): void
     {
         if (auth()->guest()) {
             abort(401);
@@ -65,7 +67,7 @@ class Comments extends Component
 
         // We notify the admin when a new comment is
         // posted unless it's the admin himself.
-        if ('carlossantosdev' !== auth()->user()->github_login) {
+        if (auth()->user()->github_login !== 'carlossantosdev') {
             User::query()
                 ->where('github_login', 'carlossantosdev')
                 ->first()
@@ -75,7 +77,7 @@ class Comments extends Component
         $this->reset('parentId');
     }
 
-    public function delete(int $commentId) : void
+    public function delete(int $commentId): void
     {
         if (auth()->guest()) {
             abort(401);

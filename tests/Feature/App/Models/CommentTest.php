@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Comment;
 use Carbon\CarbonImmutable;
 
 it('casts modified_at to datetime', function () {

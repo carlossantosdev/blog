@@ -1,39 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Models\User;
-use Filament\Tables\Table;
-use Filament\Actions\Action;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\MarkdownEditor;
+use App\Filament\Resources\UserResource\Pages\CreateUser;
 use App\Filament\Resources\UserResource\Pages\EditUser;
 use App\Filament\Resources\UserResource\Pages\ListUsers;
-use App\Filament\Resources\UserResource\Pages\CreateUser;
+use App\Models\User;
+use BackedEnum;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Override;
+use UnitEnum;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Community';
+    protected static string|UnitEnum|null $navigationGroup = 'Community';
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user';
 
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?int $navigationSort = 3;
 
-    #[\Override]
-    public static function form(Schema $schema) : Schema
+    #[Override]
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -58,8 +63,8 @@ class UserResource extends Resource
             ->columns(1);
     }
 
-    #[\Override]
-    public static function table(Table $table) : Table
+    #[Override]
+    public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
@@ -125,7 +130,7 @@ class UserResource extends Resource
             ]);
     }
 
-    public static function getPages() : array
+    public static function getPages(): array
     {
         return [
             'index' => ListUsers::route('/'),
@@ -134,12 +139,12 @@ class UserResource extends Resource
         ];
     }
 
-    public static function getGloballySearchableAttributes() : array
+    public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'github_login', 'email'];
     }
 
-    public static function getGlobalSearchResultDetails(Model $record) : array
+    public static function getGlobalSearchResultDetails(Model $record): array
     {
         return [
             'Email' => $record->email,

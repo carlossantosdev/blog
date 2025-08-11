@@ -1,12 +1,13 @@
 <?php
 
-use App\Models\Post;
+declare(strict_types=1);
+
+use App\Console\Commands\GenerateRecommendationsCommand;
 use App\Jobs\RecommendPosts;
+use App\Models\Post;
+use Illuminate\Support\Facades\Bus;
 
 use function Pest\Laravel\artisan;
-
-use Illuminate\Support\Facades\Bus;
-use App\Console\Commands\GenerateRecommendationsCommand;
 
 it('queues a recommendation job for a specific post when a slug is provided', function () {
     $post = Post::factory()->create(['slug' => 'my-slug']);

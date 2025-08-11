@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
-use App\Models\Category;
-use Spatie\Sitemap\Sitemap;
 use Illuminate\Console\Command;
+use Spatie\Sitemap\Sitemap;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(
@@ -15,7 +17,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 )]
 class GenerateSitemapCommand extends Command
 {
-    public function handle() : void
+    public function handle(): void
     {
         $sitemap = Sitemap::create();
 
@@ -26,17 +28,17 @@ class GenerateSitemapCommand extends Command
         Post::query()
             ->published()
             ->cursor()
-            ->each(fn (Post $post): \Spatie\Sitemap\Sitemap => $sitemap->add(route('posts.show', $post)));
+            ->each(fn (Post $post): Sitemap => $sitemap->add(route('posts.show', $post)));
 
         User::query()
             ->cursor()
-            ->each(fn (User $user): \Spatie\Sitemap\Sitemap => $sitemap->add(route('authors.show', $user)));
+            ->each(fn (User $user): Sitemap => $sitemap->add(route('authors.show', $user)));
 
         $sitemap->add(route('categories.index'));
 
         Category::query()
             ->cursor()
-            ->each(fn (Category $category): \Spatie\Sitemap\Sitemap => $sitemap->add(route('categories.show', $category)));
+            ->each(fn (Category $category): Sitemap => $sitemap->add(route('categories.show', $category)));
 
         $sitemap->writeToFile($path = public_path('sitemap.xml'));
 

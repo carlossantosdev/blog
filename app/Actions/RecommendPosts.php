@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions;
 
 use App\Models\Post;
@@ -10,7 +12,7 @@ class RecommendPosts
     /**
      * Ask GPT to recommend more reading material for a given post.
      */
-    public function recommend(Post $post) : void
+    public function recommend(Post $post): void
     {
         $candidates = Post::query()
             ->published()

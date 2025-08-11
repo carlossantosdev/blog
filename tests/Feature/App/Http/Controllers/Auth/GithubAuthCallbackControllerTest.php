@@ -1,19 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\User;
 use App\Notifications\Welcome;
 use Illuminate\Support\Facades\Date;
-
-use function Pest\Laravel\assertGuest;
-
+use Illuminate\Support\Facades\Notification;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\GithubProvider;
 
-use function Pest\Laravel\assertDatabaseHas;
-
-use Illuminate\Support\Facades\Notification;
-
 use function Pest\Laravel\assertAuthenticated;
+use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertGuest;
 
 it('creates a new user, sends a welcome notification, and redirects to intended URL', function () {
     Date::setTestNow(now());

@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Widgets;
 
 use App\Models\Metric;
-use Illuminate\Support\Number;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Number;
+use Override;
 
 class VisitorStats extends StatsOverviewWidget
 {
@@ -13,8 +16,8 @@ class VisitorStats extends StatsOverviewWidget
 
     protected ?string $description = 'Historical analytics data (no longer updating).';
 
-    #[\Override]
-    protected function getStats() : array
+    #[Override]
+    protected function getStats(): array
     {
         $visitors = Number::format(
             Metric::query()

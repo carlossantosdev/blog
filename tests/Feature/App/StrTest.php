@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Str;
 
 it('adds IDs to headings', function () {

@@ -1,27 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-use League\CommonMark\Node\Node;
-use League\CommonMark\Node\Inline\Text;
-use Tempest\Highlight\CommonMark\CodeBlockRenderer;
-use League\CommonMark\Renderer\NodeRendererInterface;
-use League\CommonMark\GithubFlavoredMarkdownConverter;
-use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
-use League\CommonMark\Node\Inline\AbstractStringContainer;
-use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use InvalidArgumentException;
+use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
+use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Code;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Image;
-use League\CommonMark\Extension\CommonMark\Node\Block\Heading;
-use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
-use League\CommonMark\Extension\CommonMark\Node\Block\FencedCode;
-use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
 use League\CommonMark\Extension\DefaultAttributes\DefaultAttributesExtension;
+use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
+use League\CommonMark\Extension\SmartPunct\SmartPunctExtension;
+use League\CommonMark\GithubFlavoredMarkdownConverter;
+use League\CommonMark\Node\Inline\AbstractStringContainer;
+use League\CommonMark\Node\Inline\Text;
+use League\CommonMark\Node\Node;
+use League\CommonMark\Renderer\ChildNodeRendererInterface;
+use League\CommonMark\Renderer\NodeRendererInterface;
+use Override;
+use Tempest\Highlight\CommonMark\CodeBlockRenderer;
+use Tempest\Highlight\CommonMark\InlineCodeBlockRenderer;
 
 class Str extends \Illuminate\Support\Str
 {
-    #[\Override]
-    public static function markdown($string, array $options = [], array $extensions = []) : string  // @pest-ignore-type
+    #[Override]
+    public static function markdown($string, array $options = [], array $extensions = []): string  // @pest-ignore-type
     {
         $options = array_merge([
             'default_attributes' => [
@@ -65,7 +69,7 @@ class Str extends \Illuminate\Support\Str
         return (string) $converter->convert($string);
     }
 
-    public static function lightdown(string $string, array $options = [], array $extensions = []) : string  // @pest-ignore-type
+    public static function lightdown(string $string, array $options = [], array $extensions = []): string  // @pest-ignore-type
     {
         $options = array_merge([
             'disallowed_raw_html' => [
@@ -92,10 +96,10 @@ class Str extends \Illuminate\Support\Str
             ->addRenderer(Code::class, new InlineCodeBlockRenderer)
             ->addRenderer(Image::class, new class implements NodeRendererInterface
             {
-                public function render(Node $node, ChildNodeRendererInterface $childRenderer) : string
+                public function render(Node $node, ChildNodeRendererInterface $childRenderer): string
                 {
                     if (! $node instanceof Image) {
-                        throw new \InvalidArgumentException('Incompatible node type: ' . $node::class);
+                        throw new InvalidArgumentException('Incompatible node type: '.$node::class);
                     }
 
                     // Return only the alt-text (contents of the child nodes), without an <img> tag.
@@ -114,7 +118,7 @@ class Str extends \Illuminate\Support\Str
      * This is a recursive method that will traverse the given
      * node and all of its children to get the text content.
      */
-    protected static function childrenToText(Node $node) : string
+    protected static function childrenToText(Node $node): string
     {
         return implode('', array_map(function (Node $child): string {
             if ($child instanceof AbstractStringContainer) {

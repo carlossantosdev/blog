@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use App\Models\User;
 use App\Jobs\RefreshUserData;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class RefreshUserDataCommand extends Command
@@ -12,7 +14,7 @@ class RefreshUserDataCommand extends Command
 
     protected $description = "Refresh a given user's data from GitHub. If no ID is provided, all users will be refreshed if their data is older than a day.";
 
-    public function handle() : void
+    public function handle(): void
     {
         if ($id = $this->argument('id')) {
             RefreshUserData::dispatch(
@@ -38,6 +40,6 @@ class RefreshUserDataCommand extends Command
                     ->delay(now()->addSeconds($index * 5))
             );
 
-        $this->info($users->count() . ' user(s) have been queued for a refresh.');
+        $this->info($users->count().' user(s) have been queued for a refresh.');
     }
 }

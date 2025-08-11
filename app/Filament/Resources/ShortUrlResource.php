@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Models\ShortUrl;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\ShortUrlResource\Pages\CreateShortUrl;
 use App\Filament\Resources\ShortUrlResource\Pages\EditShortUrl;
 use App\Filament\Resources\ShortUrlResource\Pages\ListShortUrls;
-use App\Filament\Resources\ShortUrlResource\Pages\CreateShortUrl;
+use App\Models\ShortUrl;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Override;
+use UnitEnum;
 
 class ShortUrlResource extends Resource
 {
@@ -22,16 +27,16 @@ class ShortUrlResource extends Resource
 
     protected static ?string $modelLabel = 'Short URL';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Others';
+    protected static string|UnitEnum|null $navigationGroup = 'Others';
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrows-pointing-in';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-arrows-pointing-in';
 
     protected static ?string $recordTitleAttribute = 'code';
 
     protected static ?int $navigationSort = 3;
 
-    #[\Override]
-    public static function form(Schema $schema) : Schema
+    #[Override]
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -50,8 +55,8 @@ class ShortUrlResource extends Resource
             ]);
     }
 
-    #[\Override]
-    public static function table(Table $table) : Table
+    #[Override]
+    public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
@@ -95,7 +100,7 @@ class ShortUrlResource extends Resource
             ]);
     }
 
-    public static function getPages() : array
+    public static function getPages(): array
     {
         return [
             'index' => ListShortUrls::route('/'),
@@ -104,7 +109,7 @@ class ShortUrlResource extends Resource
         ];
     }
 
-    public static function getGloballySearchableAttributes() : array
+    public static function getGloballySearchableAttributes(): array
     {
         return [
             'url',
@@ -112,7 +117,7 @@ class ShortUrlResource extends Resource
         ];
     }
 
-    public static function getGlobalSearchResultDetails($record) : array
+    public static function getGlobalSearchResultDetails($record): array
     {
         return [
             'URL' => $record->url,

@@ -1,8 +1,10 @@
 <?php
 
-use function Pest\Laravel\get;
+declare(strict_types=1);
 
 use Illuminate\Support\Collection;
+
+use function Pest\Laravel\get;
 
 it('lists posts', function () {
     get(route('categories.index'))

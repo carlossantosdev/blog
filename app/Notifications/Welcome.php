@@ -1,24 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Notifications;
 
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class Welcome extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    public function via(User $user) : array
+    public function via(User $user): array
     {
         return ['mail'];
     }
 
-    public function toMail(User $user) : MailMessage
+    public function toMail(User $user): MailMessage
     {
         $mailMessage = (new MailMessage)
             ->subject('Your welcome gifts')
@@ -34,7 +36,7 @@ class Welcome extends Notification implements ShouldQueue
             ->limit(5)
             ->get()
             ->each(fn (Post $post) => $mailMessage->line(
-                "- [$post->title](" . route('posts.show', $post) . ')'
+                "- [$post->title](".route('posts.show', $post).')'
             ));
 
         return $mailMessage

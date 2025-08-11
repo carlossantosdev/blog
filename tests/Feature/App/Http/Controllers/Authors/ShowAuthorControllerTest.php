@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use function Pest\Laravel\get;
-
-use Illuminate\Pagination\LengthAwarePaginator;
 
 it('shows a given author with their posts', function () {
     Post::factory(3)->create();

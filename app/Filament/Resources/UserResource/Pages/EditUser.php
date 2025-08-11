@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\UserResource\Pages;
 
+use App\Filament\Resources\UserResource;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
-use Illuminate\Support\Facades\Auth;
-use App\Filament\Resources\UserResource;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 
 class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
-    protected function getHeaderActions() : array
+    protected function getHeaderActions(): array
     {
         return [
             Action::make('impersonate')

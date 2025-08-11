@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Posts;
 
-use App\Models\Post;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShowPostController extends Controller
 {
@@ -13,7 +15,7 @@ class ShowPostController extends Controller
      * The resolution logic is here to make the code easier to follow.
      * In that case, no implicit binding since it needs to be custom.
      */
-    public function __invoke(Request $request, string $slug) : View
+    public function __invoke(Request $request, string $slug): View
     {
         // Retrieve the post, including soft-deleted ones.
         $post = Post::withTrashed()->where('slug', $slug)->first();

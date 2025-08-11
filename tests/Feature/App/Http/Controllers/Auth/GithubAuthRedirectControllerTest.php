@@ -1,9 +1,11 @@
 <?php
 
-use function Pest\Laravel\get;
+declare(strict_types=1);
 
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\GithubProvider;
+
+use function Pest\Laravel\get;
 
 it('redirects to GitHub with correct scopes', function () {
     // Mock Socialite's GitHub driver.

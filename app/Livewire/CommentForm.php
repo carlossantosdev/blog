@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Livewire;
 
-use Livewire\Component;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class CommentForm extends Component
 {
@@ -15,7 +17,7 @@ class CommentForm extends Component
     #[Validate('required|string|min:3')]
     public string $commentContent = '';
 
-    public function submit() : void
+    public function submit(): void
     {
         if (auth()->guest()) {
             abort(401);

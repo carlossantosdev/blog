@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -9,7 +11,7 @@ use Laravel\Socialite\Two\GithubProvider;
 
 class GithubAuthRedirectController extends Controller
 {
-    public function __invoke() : RedirectResponse
+    public function __invoke(): RedirectResponse
     {
         // This helps the user not lose their current page.
         // We only do it if no intended URL is set like

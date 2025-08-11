@@ -1,7 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+declare(strict_types=1);
+
 use App\Http\Controllers\User\ListUserCommentsController;
+use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')
     ->prefix('/user')

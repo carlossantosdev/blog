@@ -1,38 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources;
 
-use App\Models\Comment;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Forms\Components\Select;
-use Filament\Actions\DeleteBulkAction;
-use Filament\Schemas\Components\Group;
-use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\MarkdownEditor;
+use App\Filament\Resources\CommentResource\Pages\CreateComment;
 use App\Filament\Resources\CommentResource\Pages\EditComment;
 use App\Filament\Resources\CommentResource\Pages\ListComments;
-use App\Filament\Resources\CommentResource\Pages\CreateComment;
 use App\Filament\Resources\PostResource\Pages\ManagePostComments;
+use App\Models\Comment;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Select;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
+use Override;
+use UnitEnum;
 
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
 
-    protected static string|\UnitEnum|null $navigationGroup = 'Blog';
+    protected static string|UnitEnum|null $navigationGroup = 'Blog';
 
-    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-oval-left';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-chat-bubble-oval-left';
 
     protected static ?int $navigationSort = 1;
 
-    #[\Override]
-    public static function form(Schema $schema) : Schema
+    #[Override]
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
@@ -75,8 +80,8 @@ class CommentResource extends Resource
             ->columns(12);
     }
 
-    #[\Override]
-    public static function table(Table $table) : Table
+    #[Override]
+    public static function table(Table $table): Table
     {
         return $table
             ->defaultSort('id', 'desc')
@@ -125,15 +130,15 @@ class CommentResource extends Resource
             ]);
     }
 
-    #[\Override]
-    public static function getRelations() : array
+    #[Override]
+    public static function getRelations(): array
     {
         return [
             //
         ];
     }
 
-    public static function getPages() : array
+    public static function getPages(): array
     {
         return [
             'index' => ListComments::route('/'),
@@ -142,17 +147,17 @@ class CommentResource extends Resource
         ];
     }
 
-    public static function getGloballySearchableAttributes() : array
+    public static function getGloballySearchableAttributes(): array
     {
         return ['user.name', 'content'];
     }
 
-    public static function getGlobalSearchResultTitle(Model $record) : string
+    public static function getGlobalSearchResultTitle(Model $record): string
     {
-        return strlen($record->content) > 50 ? substr($record->content, 0, 50) . '…' : $record->content;
+        return mb_strlen($record->content) > 50 ? mb_substr($record->content, 0, 50).'…' : $record->content;
     }
 
-    public static function getGlobalSearchResultDetails(Model $record) : array
+    public static function getGlobalSearchResultDetails(Model $record): array
     {
         return ['Author' => $record->user->name];
     }

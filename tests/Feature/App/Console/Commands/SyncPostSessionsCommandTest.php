@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Console\Commands\SyncPostSessionsCommand;
 use App\Models\Post;
+use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\artisan;
-
-use Illuminate\Support\Facades\Http;
-use App\Console\Commands\SyncPostSessionsCommand;
 
 beforeEach(fn () => Http::allowStrayRequests());
 

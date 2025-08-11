@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
-use App\Str;
 use App\Models\Post;
+use App\Str;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Foundation\Queue\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class FetchImageForPost implements ShouldQueue
 {
@@ -17,14 +19,14 @@ class FetchImageForPost implements ShouldQueue
         public Post $post,
     ) {}
 
-    public function handle() : void
+    public function handle(): void
     {
         if (! app()->runningUnitTests()) {
             $image = Http::get('https://picsum.photos/1280/720')
                 ->throw()
                 ->body();
 
-            Storage::put($path = '/images/posts/' . Str::random() . '.jpg', $image);
+            Storage::put($path = '/images/posts/'.Str::random().'.jpg', $image);
         } else {
             $path = null;
         }

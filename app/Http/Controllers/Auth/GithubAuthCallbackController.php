@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\Welcome;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
 
 class GithubAuthCallbackController extends Controller
 {
-    public function __invoke() : RedirectResponse
+    public function __invoke(): RedirectResponse
     {
         $githubUser = Socialite::driver('github')->user();
 

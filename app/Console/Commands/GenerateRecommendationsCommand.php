@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
-use App\Models\Post;
 use App\Jobs\RecommendPosts;
+use App\Models\Post;
 use Illuminate\Console\Command;
 
 class GenerateRecommendationsCommand extends Command
@@ -12,7 +14,7 @@ class GenerateRecommendationsCommand extends Command
 
     protected $description = 'Generate recommendations for posts';
 
-    public function handle() : void
+    public function handle(): void
     {
         if ($slug = $this->argument('slug')) {
             $post = Post::query()->where('slug', $slug)->firstOrFail();

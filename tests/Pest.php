@@ -1,12 +1,13 @@
 <?php
 
-use Tests\TestCase;
-use Illuminate\Support\Facades\Http;
-
-use function Pest\Laravel\withoutVite;
-use function Pest\Laravel\withoutDefer;
+declare(strict_types=1);
 
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
+
+use function Pest\Laravel\withoutDefer;
+use function Pest\Laravel\withoutVite;
 
 pest()
     ->extend(TestCase::class)

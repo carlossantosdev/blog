@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Authors;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\View\View;
-use App\Http\Controllers\Controller;
 
 class ShowAuthorController extends Controller
 {
-    public function __invoke(User $user) : View
+    public function __invoke(User $user): View
     {
         return view('authors.show', [
             'author' => $user,

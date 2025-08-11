@@ -1,7 +1,9 @@
 <?php
 
-use App\Models\User;
+declare(strict_types=1);
+
 use App\Models\Comment;
+use App\Models\User;
 use App\Notifications\NewComment;
 use Illuminate\Support\HtmlString;
 
